@@ -5,6 +5,7 @@ created: 2026-05-11
 published: 2026-05-11
 category: 产品体验与思考
 description: 对 Evomap 产品的体验分析，探讨其在编码场景中的应用及反馈循环系统的依赖。
+channels: []
 ---
 
 # Evomap 产品分析
