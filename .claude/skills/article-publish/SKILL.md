@@ -5,7 +5,7 @@ description: Publish a finished article by updating its status, generating a des
 
 # Article Publish
 
-Finalize an article by updating its status to "published", generating a description, and syncing all wiki catalogs.
+Finalize an article by updating its status to "published", generating a description, and syncing all catalogs.
 
 ## Workflow
 
@@ -14,8 +14,9 @@ Publishing an article involves these steps:
 1. Identify the article file
 2. Read content and generate description
 3. Update article frontmatter
-4. Update category wiki catalog
-5. Update master wiki README
+4. Update category manager catalog
+5. Update master manager README
+6. Update public wiki.md
 
 ### Step 1: Identify the Article File
 
@@ -46,9 +47,9 @@ description: <generated description>
 ---
 ```
 
-### Step 4: Update Category Wiki Catalog
+### Step 4: Update Category Manager Catalog
 
-Open `wiki/<category>.md`. Find the article's row in the table and update:
+Open `manager/<category>.md`. Find the article's row in the table and update:
 
 - `status`: idea/draft → **published**
 - `发布日期`: add today's date
@@ -56,9 +57,19 @@ Open `wiki/<category>.md`. Find the article's row in the table and update:
 
 Move the article link from the "草稿" section (if present) to the "已发布" section.
 
-### Step 5: Update Master Wiki README
+### Step 5: Update Master Manager README
 
-Open `wiki/README.md` and update the count for the corresponding category in the summary table. Increment the published count, decrement the draft count if applicable.
+Open `manager/README.md` and update the count for the corresponding category in the summary table. Increment the published count, decrement the draft count if applicable.
+
+### Step 6: Update Public Wiki
+
+Open `wiki.md`. Under the heading matching the article's category, append a one-way link entry:
+
+```markdown
+- [[<title>]] — <description>
+```
+
+If the category heading does not exist yet, create it first.
 
 ## Notes
 

@@ -11,14 +11,10 @@
             "id": "484778487da056c4",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "wiki/README.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "README"
+              "title": "新标签页"
             }
           }
         ]
@@ -94,7 +90,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "wiki/README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +99,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "README 的反向链接列表"
+              "title": "反向链接"
             }
           },
           {
@@ -113,12 +108,11 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "wiki/README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "README 的出链列表"
+              "title": "出链"
             }
           },
           {
@@ -156,13 +150,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "wiki/README.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "README 的大纲"
+              "title": "大纲"
             }
           }
         ]
@@ -185,6 +178,15 @@
   },
   "active": "484778487da056c4",
   "lastOpenFiles": [
+    "wiki.md",
+    "wiki/README.md",
+    "manager/经验总结.md",
+    "manager/热点.md",
+    "manager/开发踩坑日记.md",
+    "manager/小工具分享.md",
+    "manager/产品体验与思考.md",
+    "manager/README.md",
+    "manager",
     "wiki/产品体验与思考.md",
     "产品体验与思考/Evomap 产品分析.md",
     "CLAUDE.md",

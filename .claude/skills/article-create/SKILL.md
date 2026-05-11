@@ -5,7 +5,7 @@ description: Create a new article idea and scaffold it in the Obsidian vault. Us
 
 # Article Create
 
-Create a new article scaffold in the vault and register it in the wiki catalog.
+Create a new article scaffold in the vault and register it in the manager catalog.
 
 ## Workflow
 
@@ -14,8 +14,8 @@ Creating a new article involves these steps:
 1. Determine category and topic
 2. Generate or confirm title
 3. Create article file with template frontmatter
-4. Register in category wiki catalog
-5. Update master wiki README stats
+4. Register in category manager catalog
+5. Update master manager README stats
 
 ### Step 1: Determine Category and Topic
 
@@ -59,9 +59,9 @@ Add a heading `# <title>` and a brief outline or placeholder sections based on t
 - **经验总结**: 背景 / 方法 / 实践 / 成果 / 可复用性
 - **小工具分享**: 工具简介 / 使用场景 / 安装/使用方法 / 效果展示
 
-### Step 4: Register in Category Wiki Catalog
+### Step 4: Register in Category Manager Catalog
 
-Open `wiki/<category>.md` and append a row to the article list table:
+Open `manager/<category>.md` and append a row to the article list table:
 
 ```markdown
 | [[<title>]] | idea | — | YYYY-MM-DD | — |
@@ -69,9 +69,9 @@ Open `wiki/<category>.md` and append a row to the article list table:
 
 Also add a link under the "想法" section if one exists.
 
-### Step 5: Update Master Wiki README
+### Step 5: Update Master Manager README
 
-Open `wiki/README.md` and update the count for the corresponding category in the summary table.
+Open `manager/README.md` and update the count for the corresponding category in the summary table.
 
 ## Notes
 
