@@ -1,9 +1,10 @@
 ---
-status: idea
+status: published
 tags: []
 created: 2026-05-11
-published:
+published: 2026-05-11
 category: 产品体验与思考
+description: 对 Evomap 产品的体验分析，探讨其在编码场景中的应用及反馈循环系统的依赖。
 ---
 
 # Evomap 产品分析
@@ -23,6 +24,8 @@ category: 产品体验与思考
 ## 不足
 
 （可以改进的地方）
+1. 目前似乎只针对编码场景
+2. 只能针对已经建立反馈循环的系统。也就是说必须让AI自己运行并且拿到报错信息，你手动贴进去不知道有没有效果？
 
 ## 思考
 
