@@ -25,3 +25,21 @@ Act as a **writing partner**: help draft, edit, and polish articles. Brainstorm 
 - Tag articles with broad themes (e.g., `#productivity`, `#tech`, `#reflection`) for discoverability.
 - When updating the manager catalog, keep the `status` field in sync with the article's frontmatter.
 - New article ideas can start as stub files with just a title and `status: idea`.
+
+## Article Frontmatter
+
+All articles use YAML frontmatter. Key fields:
+
+- `status`: `idea` | `draft` | `published`
+- `tags`: list of hashtags
+- `created`: `YYYY-MM-DD`
+- `published`: `YYYY-MM-DD` (set when status becomes published)
+- `category`: folder name (e.g. `开发踩坑日记`)
+- `source`: primary link (usually 墨问)
+- `channels`: **list of objects**, each with:
+  - `name`: channel name (墨问 / CSDN / 知乎 / infoQ)
+  - `url`: article URL on that channel
+  - `views`, `likes`, `collects`, `comments`: numeric stats (default 0)
+  - `published_at`: `YYYY-MM-DD`
+
+**Important**: `channels` must be an array of objects, not a key-value map. Empty initial value is `channels: []`. See existing published articles for examples.
