@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>抽象层级雷达图 — Pi vs DeepAgents</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #FDFCF8; --fg: #2C2C24; --pi: #5D7052; --da: #6B8FA8; --border: #DED8CF; --muted: #78786C; --card: #FEFEFA; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--fg); min-height: 100vh; padding: 40px 20px; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 36px; }
+  header h1 { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 600; }
+  header h1 em { font-style: italic; color: var(--pi); }
+  header p { color: var(--muted); margin-top: 8px; font-size: 0.9rem; }
+
+  .chart-wrapper { display: flex; justify-content: center; margin-bottom: 36px; }
+  .chart-container { position: relative; width: 500px; height: 500px; }
+  svg { width: 100%; height: 100%; }
+
+  .tooltip {
+    position: absolute; background: var(--card); border: 1.5px solid var(--border);
+    border-radius: 1rem; padding: 12px 16px; font-size: 0.8rem; pointer-events: none;
+    opacity: 0; transition: opacity 0.2s ease; box-shadow: 0 8px 24px -4px rgba(0,0,0,0.1);
+    max-width: 280px; z-index: 10;
+  }
+  .tooltip.visible { opacity: 1; }
+  .tooltip strong { display: block; margin-bottom: 4px; font-size: 0.85rem; }
+
+  .controls { display: flex; justify-content: center; gap: 16px; margin-bottom: 28px; flex-wrap: wrap; }
+  .toggle-btn {
+    padding: 8px 20px; border-radius: 999px; border: 1.5px solid var(--border);
+    background: var(--card); font-family: 'Nunito', sans-serif; font-size: 0.85rem;
+    font-weight: 600; cursor: pointer; transition: all 0.3s ease; color: var(--muted);
+  }
+  .toggle-btn.active.pi { background: var(--pi); color: white; border-color: var(--pi); }
+  .toggle-btn.active.da { background: var(--da); color: white; border-color: var(--da); }
+
+  .detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .detail-card {
+    background: var(--card); border: 1.5px solid var(--border); border-radius: 1.5rem;
+    padding: 20px; transition: all 0.3s ease; cursor: pointer;
+  }
+  .detail-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px -4px rgba(0,0,0,0.08); }
+  .detail-card h3 { font-family: 'Fraunces', serif; font-size: 1.05rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .detail-card .pi-score { color: var(--pi); font-weight: 700; font-size: 1.1rem; }
+  .detail-card .da-score { color: var(--da); font-weight: 700; font-size: 1.1rem; }
+  .detail-bar { height: 6px; border-radius: 3px; background: rgba(222,216,207,0.4); margin: 8px 0; position: relative; overflow: hidden; }
+  .detail-bar .fill { position: absolute; height: 100%; border-radius: 3px; transition: width 0.6s ease; }
+  .detail-bar .fill.pi { background: var(--pi); }
+  .detail-bar .fill.da { background: var(--da); }
+  .detail-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; margin-top: 6px; }
+
+  .legend { display: flex; justify-content: center; gap: 24px; margin-top: 24px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--muted); }
+  .legend-line { width: 24px; height: 3px; border-radius: 2px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Abstraction <em>Radar</em></h1>
+    <p>8 个维度的抽象层级对比 — 数值越高表示该维度抽象层级越高</p>
+  </header>
+
+  <div class="controls">
+    <button class="toggle-btn active pi" onclick="toggleSeries('pi')">Pi</button>
+    <button class="toggle-btn active da" onclick="toggleSeries('da')">DeepAgents</button>
+  </div>
+
+  <div class="chart-wrapper">
+    <div class="chart-container">
+      <svg viewBox="0 0 500 500" id="radar"></svg>
+      <div class="tooltip" id="tooltip"></div>
+    </div>
+  </div>
+
+  <div class="detail-grid" id="detailGrid"></div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-line" style="background: var(--pi)"></div> Pi</div>
+    <div class="legend-item"><div class="legend-line" style="background: var(--da)"></div> DeepAgents</div>
+  </div>
+</div>
+
+<script>
+  // Data: 8 dimensions, scores 1-10 (higher = more abstraction)
+  const dimensions = [
+    { name: 'Agent Runtime', pi: 5, da: 8, desc: 'Pi 自研 AgentLoop (中抽象)；DeepAgents 嫁接 LangGraph (高抽象)' },
+    { name: 'LLM 抽象', pi: 6, da: 9, desc: 'Pi 自研 pi-ai 统一层；DeepAgents 继承 LangChain 完整生态' },
+    { name: '工具系统', pi: 5, da: 8, desc: 'Pi 自研 AgentTool 接口；DeepAgents 基于 LangChain BaseTool' },
+    { name: '状态管理', pi: 4, da: 8, desc: 'Pi 显式 mutable state；DeepAgents DeltaChannel + checkpointer' },
+    { name: 'CLI/TUI', pi: 3, da: 7, desc: 'Pi 自研 TUI (完全可控)；DeepAgents Textual (成熟框架)' },
+    { name: '上下文压缩', pi: 4, da: 7, desc: 'Pi 显式 compaction；DeepAgents SummarizationMiddleware 自动' },
+    { name: 'SubAgents', pi: 3, da: 9, desc: 'Pi 间接支持；DeepAgents 原生三种形态 (SubAgent/Compiled/Async)' },
+    { name: '配置/初始化', pi: 6, da: 8, desc: 'Pi AgentOptions 显式配置；DeepAgents create_deep_agent 声明式' }
+  ];
+
+  const colors = { pi: '#5D7052', da: '#6B8FA8' };
+  let showPi = true, showDa = true;
+
+  function drawRadar() {
+    const svg = document.getElementById('radar');
+    const cx = 250, cy = 250, r = 180;
+    const n = dimensions.length;
+    const angleStep = (Math.PI * 2) / n;
+
+    let html = '';
+
+    // Grid circles
+    for (let level = 1; level <= 5; level++) {
+      const radius = (r / 5) * level;
+      html += `<circle cx="${cx}" cy="${cy}" r="${radius}" fill="none" stroke="#DED8CF" stroke-width="1" stroke-dasharray="4 4"/>`;
+    }
+
+    // Axis lines and labels
+    for (let i = 0; i < n; i++) {
+      const angle = i * angleStep - Math.PI / 2;
+      const x = cx + Math.cos(angle) * r;
+      const y = cy + Math.sin(angle) * r;
+      html += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="#DED8CF" stroke-width="1"/>`;
+
+      const lx = cx + Math.cos(angle) * (r + 28);
+      const ly = cy + Math.sin(angle) * (r + 28);
+      const anchor = Math.abs(Math.cos(angle)) < 0.3 ? 'middle' : (Math.cos(angle) > 0 ? 'start' : 'end');
+      html += `<text x="${lx}" y="${ly}" text-anchor="${anchor}" font-size="12" fill="#78786C" font-weight="600" font-family="Nunito">${dimensions[i].name}</text>`;
+    }
+
+    // Data polygons
+    ['pi', 'da'].forEach(series => {
+      if ((series === 'pi' && !showPi) || (series === 'da' && !showDa)) return;
+      const points = dimensions.map((d, i) => {
+        const angle = i * angleStep - Math.PI / 2;
+        const radius = (d[series] / 10) * r;
+        return `${cx + Math.cos(angle) * radius},${cy + Math.sin(angle) * radius}`;
+      }).join(' ');
+      html += `<polygon points="${points}" fill="${colors[series]}" fill-opacity="0.15" stroke="${colors[series]}" stroke-width="2.5" stroke-linejoin="round"/>`;
+
+      // Dots
+      dimensions.forEach((d, i) => {
+        const angle = i * angleStep - Math.PI / 2;
+        const radius = (d[series] / 10) * r;
+        const x = cx + Math.cos(angle) * radius;
+        const y = cy + Math.sin(angle) * radius;
+        html += `<circle cx="${x}" cy="${y}" r="5" fill="${colors[series]}" stroke="white" stroke-width="2" class="radar-dot" data-series="${series}" data-dim="${i}"/>`;
+      });
+    });
+
+    svg.innerHTML = html;
+
+    // Tooltip handlers
+    document.querySelectorAll('.radar-dot').forEach(dot => {
+      dot.addEventListener('mouseenter', e => {
+        const series = e.target.dataset.series;
+        const dim = dimensions[e.target.dataset.dim];
+        const tooltip = document.getElementById('tooltip');
+        tooltip.innerHTML = `<strong style="color:${colors[series]}">${series === 'pi' ? 'Pi' : 'DeepAgents'} — ${dim.name}</strong><br>抽象层级: ${dim[series]}/10<br><span style="color:#78786C;font-size:0.75rem">${dim.desc}</span>`;
+        tooltip.classList.add('visible');
+      });
+      dot.addEventListener('mousemove', e => {
+        const tooltip = document.getElementById('tooltip');
+        const rect = document.querySelector('.chart-container').getBoundingClientRect();
+        tooltip.style.left = (e.clientX - rect.left + 12) + 'px';
+        tooltip.style.top = (e.clientY - rect.top - 12) + 'px';
+      });
+      dot.addEventListener('mouseleave', () => {
+        document.getElementById('tooltip').classList.remove('visible');
+      });
+    });
+  }
+
+  function renderDetailCards() {
+    const grid = document.getElementById('detailGrid');
+    grid.innerHTML = dimensions.map((d, i) => `
+      <div class="detail-card">
+        <h3>${d.name}</h3>
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+          <span class="pi-score">Pi: ${d.pi}</span>
+          <span class="da-score">DeepAgents: ${d.da}</span>
+        </div>
+        <div class="detail-bar">
+          <div class="fill pi" style="width:${d.pi * 10}%;left:0"></div>
+          <div class="fill da" style="width:${d.da * 10}%;left:0;opacity:0.6"></div>
+        </div>
+        <div class="detail-desc">${d.desc}</div>
+      </div>
+    `).join('');
+  }
+
+  function toggleSeries(series) {
+    if (series === 'pi') showPi = !showPi;
+    if (series === 'da') showDa = !showDa;
+    document.querySelectorAll('.toggle-btn').forEach((btn, i) => {
+      const s = i === 0 ? 'pi' : 'da';
+      btn.classList.toggle('active', s === 'pi' ? showPi : showDa);
+    });
+    drawRadar();
+  }
+
+  drawRadar();
+  renderDetailCards();
+</script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>设计理念对比 — Pi vs DeepAgents</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #FDFCF8; --fg: #2C2C24; --pi: #5D7052; --da: #6B8FA8; --border: #DED8CF; --muted: #78786C; --card: #FEFEFA; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--fg); min-height: 100vh; padding: 40px 20px; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 40px; }
+  header h1 { font-family: 'Fraunces', serif; font-size: 2.2rem; font-weight: 600; }
+  header h1 em { font-style: italic; color: var(--pi); }
+  header p { color: var(--muted); margin-top: 8px; font-size: 0.9rem; }
+
+  /* Philosophy cards */
+  .philosophy-hero {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 40px;
+  }
+  @media (max-width: 768px) { .philosophy-hero { grid-template-columns: 1fr; } }
+  .hero-card {
+    background: var(--card); border: 1.5px solid var(--border); border-radius: 2rem;
+    padding: 36px 32px; position: relative; overflow: hidden; transition: all 0.4s ease;
+  }
+  .hero-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px -8px rgba(0,0,0,0.08); }
+  .hero-card.pi { border-top: 4px solid var(--pi); }
+  .hero-card.da { border-top: 4px solid var(--da); }
+  .hero-card .tag {
+    font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 4px 12px; border-radius: 999px; margin-bottom: 16px; display: inline-block;
+  }
+  .hero-card.pi .tag { background: var(--pi-light, rgba(93,112,82,0.12)); color: var(--pi); }
+  .hero-card.da .tag { background: var(--da-light, rgba(107,143,168,0.12)); color: var(--da); }
+  .hero-card h2 { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 600; margin-bottom: 12px; line-height: 1.4; }
+  .hero-card .subtitle { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+  /* Spectrum comparison */
+  .spectrum-section { margin-bottom: 36px; }
+  .spectrum-title { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 600; margin-bottom: 20px; text-align: center; }
+  .spectrum-row { margin-bottom: 18px; }
+  .spectrum-label { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--muted); margin-bottom: 6px; }
+  .spectrum-label span:first-child { color: var(--pi); font-weight: 600; }
+  .spectrum-label span:last-child { color: var(--da); font-weight: 600; }
+  .spectrum-bar { height: 10px; background: rgba(222,216,207,0.3); border-radius: 5px; position: relative; overflow: hidden; }
+  .spectrum-fill {
+    position: absolute; height: 100%; border-radius: 5px; transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .spectrum-fill.pi { background: var(--pi); }
+  .spectrum-fill.da { background: var(--da); }
+  .spectrum-mid { position: absolute; left: 50%; top: -4px; bottom: -4px; width: 2px; background: var(--border); }
+
+  /* Decision matrix */
+  .section-title { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 600; margin: 36px 0 20px; text-align: center; }
+  .decision-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .decision-card {
+    background: var(--card); border: 1.5px solid var(--border); border-radius: 1.5rem;
+    padding: 20px; transition: all 0.3s ease;
+  }
+  .decision-card:hover { border-color: var(--pi); transform: translateY(-2px); }
+  .decision-card h4 { font-size: 0.85rem; color: var(--muted); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .decision-card .winner { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .decision-card .winner-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .decision-card .winner-name { font-weight: 700; font-size: 1rem; }
+  .decision-card .reason { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+  /* Cross-learning */
+  .learning-section { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
+  @media (max-width: 900px) { .learning-section { grid-template-columns: 1fr; } }
+  .learning-card {
+    background: var(--card); border: 1.5px solid var(--border); border-radius: 1.5rem; padding: 24px;
+  }
+  .learning-card h3 { font-family: 'Fraunces', serif; font-size: 1.05rem; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .learning-card.pi h3 { color: var(--pi); }
+  .learning-card.da h3 { color: var(--da); }
+  .learning-item { padding: 10px 0; border-bottom: 1px solid rgba(222,216,207,0.4); font-size: 0.84rem; line-height: 1.5; }
+  .learning-item:last-child { border-bottom: none; }
+  .learning-item strong { display: block; margin-bottom: 2px; }
+  .learning-item span { color: var(--muted); font-size: 0.78rem; }
+
+  /* Trend tags */
+  .trends { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 28px; }
+  .trend-tag {
+    padding: 8px 16px; border-radius: 999px; border: 1.5px solid var(--border);
+    background: var(--card); font-size: 0.8rem; color: var(--fg); font-weight: 500;
+    transition: all 0.3s ease; cursor: default;
+  }
+  .trend-tag:hover { background: rgba(222,216,207,0.3); transform: scale(1.05); }
+  .trend-tag .both { color: #8B7AA8; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Design <em>Philosophy</em></h1>
+    <p>两种脚手架哲学:"掌控每一字节" vs "默认即正确"</p>
+  </header>
+
+  <div class="philosophy-hero">
+    <div class="hero-card pi">
+      <div class="tag">Pi 设计哲学</div>
+      <h2>"掌控每一字节"</h2>
+      <div class="subtitle">
+        从流式事件到 token 计数，每一层都暴露给你，因为 Agent 的行为值得被精确控制。
+        自研核心，精细控制，事件驱动，状态显式化。
+      </div>
+    </div>
+    <div class="hero-card da">
+      <div class="tag">DeepAgents 设计哲学</div>
+      <h2>"默认即正确"</h2>
+      <div class="subtitle">
+        你不需要成为一个 Agent 专家才能使用 Agent — 我们把最合理的默认都打包好了。
+        站在巨人肩膀上，开箱即用，生态嫁接，batteries included。
+      </div>
+    </div>
+  </div>
+
+  <div class="spectrum-section">
+    <div class="spectrum-title">设计倾向光谱</div>
+
+    <div class="spectrum-row">
+      <div class="spectrum-label"><span>自建组件</span><span>嫁接生态</span></div>
+      <div class="spectrum-bar">
+        <div class="spectrum-fill pi" style="left:0;width:78%"></div>
+        <div class="spectrum-mid"></div>
+        <div class="spectrum-fill da" style="right:0;width:82%"></div>
+      </div>
+    </div>
+
+    <div class="spectrum-row">
+      <div class="spectrum-label"><span>显式配置</span><span>约定优于配置</span></div>
+      <div class="spectrum-bar">
+        <div class="spectrum-fill pi" style="left:0;width:72%"></div>
+        <div class="spectrum-mid"></div>
+        <div class="spectrum-fill da" style="right:0;width:85%"></div>
+      </div>
+    </div>
+
+    <div class="spectrum-row">
+      <div class="spectrum-label"><span>精细事件</span><span>粗粒度拦截</span></div>
+      <div class="spectrum-bar">
+        <div class="spectrum-fill pi" style="left:0;width:90%"></div>
+        <div class="spectrum-mid"></div>
+        <div class="spectrum-fill da" style="right:0;width:55%"></div>
+      </div>
+    </div>
+
+    <div class="spectrum-row">
+      <div class="spectrum-label"><span>零依赖</span><span>生态最大化</span></div>
+      <div class="spectrum-bar">
+        <div class="spectrum-fill pi" style="left:0;width:80%"></div>
+        <div class="spectrum-mid"></div>
+        <div class="spectrum-fill da" style="right:0;width:88%"></div>
+      </div>
+    </div>
+
+    <div class="spectrum-row">
+      <div class="spectrum-label"><span>启动速度优先</span><span>功能完整优先</span></div>
+      <div class="spectrum-bar">
+        <div class="spectrum-fill pi" style="left:0;width:85%"></div>
+        <div class="spectrum-mid"></div>
+        <div class="spectrum-fill da" style="right:0;width:75%"></div>
+      </div>
+    </div>
+
+    <div class="spectrum-row">
+      <div class="spectrum-label"><span>类型安全优先</span><span>开发效率优先</span></div>
+      <div class="spectrum-bar">
+        <div class="spectrum-fill pi" style="left:0;width:70%"></div>
+        <div class="spectrum-mid"></div>
+        <div class="spectrum-fill da" style="right:0;width:68%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">选型决策矩阵</div>
+  <div class="decision-grid">
+    <div class="decision-card">
+      <h4>最快上手</h4>
+      <div class="winner"><div class="winner-dot" style="background:var(--da)"></div><div class="winner-name" style="color:var(--da)">DeepAgents</div></div>
+      <div class="reason">pip install + 一行代码运行。LangGraph Studio 可视化调试。</div>
+    </div>
+    <div class="decision-card">
+      <h4>最大控制力</h4>
+      <div class="winner"><div class="winner-dot" style="background:var(--pi)"></div><div class="winner-name" style="color:var(--pi)">Pi</div></div>
+      <div class="reason">自研 runtime，可拦截每个事件。零抽象泄漏。</div>
+    </div>
+    <div class="decision-card">
+      <h4>最大生态</h4>
+      <div class="winner"><div class="winner-dot" style="background:var(--da)"></div><div class="winner-name" style="color:var(--da)">DeepAgents</div></div>
+      <div class="reason">继承 LangChain 全部工具、模型、集成。MCP 原生支持。</div>
+    </div>
+    <div class="decision-card">
+      <h4>最佳性能</h4>
+      <div class="winner"><div class="winner-dot" style="background:var(--pi)"></div><div class="winner-name" style="color:var(--pi)">Pi</div></div>
+      <div class="reason">Bun 编译单二进制，无框架 overhead，lazy provider 加载。</div>
+    </div>
+    <div class="decision-card">
+      <h4>最佳可观测性</h4>
+      <div class="winner"><div class="winner-dot" style="background:var(--pi)"></div><div class="winner-name" style="color:var(--pi)">Pi</div></div>
+      <div class="reason">20+ 精细事件类型，text_delta/toolcall_delta 级别追踪。</div>
+    </div>
+    <div class="decision-card">
+      <h4>最佳调试体验</h4>
+      <div class="winner"><div class="winner-dot" style="background:var(--da)"></div><div class="winner-name" style="color:var(--da)">DeepAgents</div></div>
+      <div class="reason">LangGraph Studio 图可视化，checkpointer 状态回放。</div>
+    </div>
+    <div class="decision-card">
+      <h4>最佳 TypeScript 支持</h4>
+      <div class="winner"><div class="winner-dot" style="background:var(--pi)"></div><div class="winner-name" style="color:var(--pi)">Pi</div></div>
+      <div class="reason">编译时强类型，TypeBox schema，IDE 自动补全极佳。</div>
+    </div>
+    <div class="decision-card">
+      <h4>最佳 Python 支持</h4>
+      <div class="winner"><div class="winner-dot" style="background:var(--da)"></div><div class="winner-name" style="color:var(--da)">DeepAgents</div></div>
+      <div class="reason">Python 原生，Pydantic 验证，uv 快速安装。</div>
+    </div>
+  </div>
+
+  <div class="section-title">互相借鉴的方向</div>
+  <div class="learning-section">
+    <div class="learning-card pi">
+      <h3>Pi 可向 DeepAgents 学习</h3>
+      <div class="learning-item">
+        <strong>Middleware 架构</strong>
+        <span>引入声明式 Middleware 堆栈概念，简化扩展开发的组合逻辑</span>
+      </div>
+      <div class="learning-item">
+        <strong>BackendProtocol</strong>
+        <span>抽象出可插拔存储后端，提高可测试性和可移植性</span>
+      </div>
+      <div class="learning-item">
+        <strong>Profile 系统</strong>
+        <span>按模型调优行为是高频需求，可通过扩展系统实现 HarnessProfile 机制</span>
+      </div>
+      <div class="learning-item">
+        <strong>子代理原生支持</strong>
+        <span>将 SubAgent 提升为一等公民，而非通过工具间接实现</span>
+      </div>
+    </div>
+    <div class="learning-card da">
+      <h3>DeepAgents 可向 Pi 学习</h3>
+      <div class="learning-item">
+        <strong>事件粒度</strong>
+        <span>增加 text_delta/tool_execution_update 级别事件，提升可观测性</span>
+      </div>
+      <div class="learning-item">
+        <strong>Lazy Provider 加载</strong>
+        <span>按需加载 provider 模块，改善 CLI 启动速度</span>
+      </div>
+      <div class="learning-item">
+        <strong>分支式会话</strong>
+        <span>线性 checkpoint 可借鉴 Pi 的 fork/navigate 会话树设计</span>
+      </div>
+      <div class="learning-item">
+        <strong>自研 TUI</strong>
+        <span>Textual 在极致性能场景下不如自研 TUI，重度 CLI 用户可能受益</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">共同趋势</div>
+  <div class="trends">
+    <div class="trend-tag"><span class="both">两者都</span> 实现了 Skills 系统</div>
+    <div class="trend-tag"><span class="both">两者都</span> 在工具层引入权限控制</div>
+    <div class="trend-tag"><span class="both">两者都</span> 实现了上下文压缩/摘要</div>
+    <div class="trend-tag"><span class="both">两者都</span> 支持多 Provider 切换</div>
+    <div class="trend-tag"><span class="both">两者都</span> 走向 SubAgent 原生支持</div>
+    <div class="trend-tag"><span class="both">两者都</span> 采用 "信任 LLM + 边界控制" 安全模型</div>
+  </div>
+</div>
+
+<script>
+  // Animate spectrum bars on load
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.spectrum-fill').forEach((fill, i) => {
+      const targetWidth = fill.style.width;
+      fill.style.width = '0';
+      setTimeout(() => { fill.style.width = targetWidth; }, 200 + i * 100);
+    });
+  });
+</script>
+</body>
+</html>

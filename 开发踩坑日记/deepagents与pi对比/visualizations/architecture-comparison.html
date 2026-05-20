@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>架构对比 — Pi vs DeepAgents</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FDFCF8; --fg: #2C2C24; --pi: #5D7052; --da: #6B8FA8;
+    --pi-light: rgba(93,112,82,0.12); --da-light: rgba(107,143,168,0.12);
+    --border: #DED8CF; --muted: #78786C; --card: #FEFEFA;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--fg); min-height: 100vh; padding: 40px 20px; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 40px; }
+  header h1 { font-family: 'Fraunces', serif; font-size: 2.2rem; font-weight: 600; }
+  header h1 em { font-style: italic; color: var(--pi); }
+  header p { color: var(--muted); margin-top: 8px; font-size: 0.9rem; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
+
+  .project-card {
+    background: var(--card); border: 1.5px solid var(--border); border-radius: 1.8rem;
+    padding: 28px; box-shadow: 0 4px 20px -2px rgba(0,0,0,0.06);
+  }
+  .project-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .project-dot { width: 14px; height: 14px; border-radius: 50%; }
+  .project-name { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 600; }
+  .project-lang { font-size: 0.75rem; color: var(--muted); background: var(--pi-light); padding: 4px 12px; border-radius: 999px; margin-left: auto; }
+  .da .project-lang { background: var(--da-light); }
+
+  .layer {
+    border: 1.5px solid var(--border); border-radius: 1rem; padding: 14px 16px;
+    margin-bottom: 10px; transition: all 0.35s ease; cursor: pointer; position: relative;
+    background: var(--card);
+  }
+  .layer:hover { transform: translateX(4px); border-color: var(--pi); box-shadow: 0 4px 12px -2px var(--pi-light); }
+  .da .layer:hover { border-color: var(--da); box-shadow: 0 4px 12px -2px var(--da-light); }
+  .layer-title { font-weight: 600; font-size: 0.9rem; }
+  .layer-desc { font-size: 0.78rem; color: var(--muted); margin-top: 3px; }
+  .layer-meta { font-size: 0.7rem; color: var(--muted); font-family: 'Nunito', monospace; margin-top: 6px; padding-top: 6px; border-top: 1px solid rgba(222,216,207,0.4); display: none; }
+  .layer.expanded .layer-meta { display: block; animation: fadeIn 0.3s ease; }
+  .layer-toggle { position: absolute; right: 14px; top: 14px; font-size: 0.7rem; color: var(--muted); transition: transform 0.3s ease; }
+  .layer.expanded .layer-toggle { transform: rotate(180deg); }
+
+  .arrow-down { text-align: center; color: var(--muted); font-size: 0.8rem; margin: 6px 0; }
+
+  .flow-connector {
+    display: flex; align-items: center; justify-content: center; gap: 20px;
+    margin: 16px 0; padding: 14px; background: rgba(222,216,207,0.2); border-radius: 1rem;
+    font-size: 0.8rem;
+  }
+  .flow-connector .from, .flow-connector .to { font-weight: 600; }
+  .flow-connector .from { color: var(--pi); }
+  .flow-connector .to { color: var(--da); }
+  .flow-connector .action { color: var(--muted); }
+
+  .legend { display: flex; justify-content: center; gap: 24px; margin-top: 32px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--muted); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  .summary { margin-top: 36px; background: var(--card); border: 1.5px solid var(--border); border-radius: 1.8rem; padding: 28px; }
+  .summary h2 { font-family: 'Fraunces', serif; font-size: 1.3rem; margin-bottom: 16px; }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .summary-item { padding: 14px; background: rgba(222,216,207,0.15); border-radius: 1rem; }
+  .summary-item h4 { font-size: 0.8rem; color: var(--muted); margin-bottom: 6px; }
+  .summary-item p { font-size: 0.85rem; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Architecture <em>Comparison</em></h1>
+    <p>Pi 5层分层架构 vs DeepAgents 图编排 + Middleware 堆栈架构</p>
+  </header>
+
+  <div class="two-col">
+    <!-- Pi Column -->
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-dot" style="background: var(--pi)"></div>
+        <div class="project-name">Pi</div>
+        <div class="project-lang">TypeScript / Bun</div>
+      </div>
+
+      <div class="layer" onclick="toggle(this)">
+        <div class="layer-title">L1 — User Interface</div>
+        <div class="layer-desc">prompt() / steer() / followUp() / continue()</div>
+        <div class="layer-toggle">&#9662;</div>
+        <div class="layer-meta">
+          用户交互入口。steer() 可在 assistant turn 完成后注入指令。<br>
+          followUp() 在 Agent 即将停止时触发新一轮对话。
+        </div>
+      </div>
+      <div class="arrow-down">&#9660;</div>
+
+      <div class="layer" onclick="toggle(this)">
+        <div class="layer-title">L2 — Agent (有状态包装器)</div>
+        <div class="layer-desc">AgentState 管理 + 队列编排 + 事件分发</div>
+        <div class="layer-toggle">&#9662;</div>
+        <div class="layer-meta">
+          持有完整状态: systemPrompt, model, tools, messages, pendingToolCalls。<br>
+          管理 steeringQueue, followUpQueue, pendingMessageQueue。<br>
+          processEvents() 更新状态并通知监听器。
+        </div>
+      </div>
+      <div class="arrow-down">&#9660;</div>
+
+      <div class="layer" onclick="toggle(this)">
+        <div class="layer-title">L3 — AgentLoop (无状态循环)</div>
+        <div class="layer-desc">纯函数: 执行 LLM 调用 → 工具调度 → 事件发射</div>
+        <div class="layer-toggle">&#9662;</div>
+        <div class="layer-meta">
+          runAgentLoop(prompts, context, config, emit, signal)<br>
+          核心流程: getSteering → inject messages → streamAssistant → executeTools → checkStop<br>
+          无状态设计使得测试和复用极为简单。
+        </div>
+      </div>
+      <div class="arrow-down">&#9660;</div>
+
+      <div class="layer" onclick="toggle(this)">
+        <div class="layer-title">L4 — LLM Stream</div>
+        <div class="layer-desc">模型通信 + 流式响应 + 消息转换</div>
+        <div class="layer-toggle">&#9662;</div>
+        <div class="layer-meta">
+          transformContext → convertToLlm → build context → getApiKey → streamSimple<br>
+          流式事件: start → text_delta/thinking_delta/toolcall_delta → done/error<br>
+          多 Provider 通过 lazy registration 统一。
+        </div>
+      </div>
+      <div class="arrow-down">&#9660;</div>
+
+      <div class="layer" onclick="toggle(this)">
+        <div class="layer-title">L5 — Tool Execution</div>
+        <div class="layer-desc">副作用发生地: prepare → execute → finalize</div>
+        <div class="layer-toggle">&#9662;</div>
+        <div class="layer-meta">
+          支持 sequential / parallel 执行模式。<br>
+          beforeToolCall / afterToolCall 钩子可拦截任意阶段。<br>
+          返回 AgentToolResult { content, details, terminate? }。
+        </div>
+      </div>
+    </div>
+
+    <!-- DeepAgents Column -->
+    <div class="project-card da">
+      <div class="project-header">
+        <div class="project-dot" style="background: var(--da)"></div>
+        <div class="project-name">DeepAgents</div>
+        <div class="project-lang">Python / uv</div>
+      </div>
+
+      <div class="layer" onclick="toggle(this)">
+        <div class="layer-title">User Input</div>
+        <div class="layer-desc">agent.invoke({messages: [...]})</div>
+        <div class="layer-toggle">&#9662;</div>
+        <div class="layer-meta">
+          通过 CompiledStateGraph.invoke() 启动。<br>
+          支持 streaming、async、batch 模式。<br>
+          CLI 提供交互式 TUI (Textual)。
+        </div>
+      </div>
+      <div class="arrow-down">&#9660;</div>
+
+      <div class="layer" onclick="toggle(this)">
+        <div class="layer-title">State: _DeepAgentState</div>
+        <div class="layer-desc">DeltaChannel 优化 + AgentState 继承</div>
+        <div class="layer-toggle">&#9662;</div>
+        <div class="layer-meta">
+          messages 使用 DeltaChannel 将 checkpoint 增长从 O(N²) 降到 O(N)。<br>
+          继承 LangGraph 的 State 管理，支持 checkpointer 持久化。<br>
+          snapshot_frequency=50 控制快照频率。
+        </div>
+      </div>
+      <div class="arrow-down">&#9660;</div>
+
+      <div class="layer" onclick="toggle(this)">
+        <div class="layer-title">Middleware Stack</div>
+        <div class="layer-desc">Base → User → Tail 三层堆栈</div>
+        <div class="layer-toggle">&#9662;</div>
+        <div class="layer-meta">
+          <strong>Base:</strong> TodoList + Skills + Filesystem + SubAgent + AsyncSubAgent + Summarization + PatchToolCalls<br>
+          <strong>User:</strong> 自定义 middleware 插入位置<br>
+          <strong>Tail:</strong> Profile extra + ToolExclusion + PromptCaching + Memory + HITL
+        </div>
+      </div>
+      <div class="arrow-down">&#9660;</div>
+
+      <div class="layer" onclick="toggle(this)">
+        <div class="layer-title">LangGraph Runtime</div>
+        <div class="layer-desc">CompiledStateGraph 执行引擎</div>
+        <div class="layer-toggle">&#9662;</div>
+        <div class="layer-meta">
+          create_agent() 返回 CompiledStateGraph。<br>
+          节点: agent (LLM call) → tools (工具路由) → 循环<br>
+          recursion_limit=9999 防止无限循环。<br>
+          支持 LangGraph Studio 可视化调试。
+        </div>
+      </div>
+      <div class="arrow-down">&#9660;</div>
+
+      <div class="layer" onclick="toggle(this)">
+        <div class="layer-title">Backend / Tools</div>
+        <div class="layer-desc">BackendProtocol + 内置工具集</div>
+        <div class="layer-toggle">&#9662;</div>
+        <div class="layer-meta">
+          <strong>Backend:</strong> StateBackend (默认) / FilesystemBackend / 自定义<br>
+          <strong>Tools:</strong> write_todos, ls, read_file, write_file, edit_file, glob, grep, execute, task<br>
+          <strong>权限:</strong> FilesystemPermission 访问控制规则
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flow-connector">
+    <span class="from">Pi: 分层函数调用</span>
+    <span class="action">&#8596; 对比 &#8596;</span>
+    <span class="to">DeepAgents: 编译状态图</span>
+  </div>
+
+  <div class="summary">
+    <h2>架构差异要点</h2>
+    <div class="summary-grid">
+      <div class="summary-item">
+        <h4>调用链</h4>
+        <p><strong>Pi:</strong> Agent.prompt() → AgentLoop.run() → streamSimple() → executeTools() → emit()</p>
+      </div>
+      <div class="summary-item">
+        <h4>调用链</h4>
+        <p><strong>DeepAgents:</strong> graph.invoke() → Middleware Stack → LLM → ToolNode → 循环</p>
+      </div>
+      <div class="summary-item">
+        <h4>状态管理</h4>
+        <p><strong>Pi:</strong> 显式 mutable AgentState (getter/setter)<br><strong>DeepAgents:</strong> LangGraph DeltaChannel (O(N) checkpoint)</p>
+      </div>
+      <div class="summary-item">
+        <h4>流式处理</h4>
+        <p><strong>Pi:</strong> EventStream push-based (text_delta 级别)<br><strong>DeepAgents:</strong> LangGraph streaming pull-based</p>
+      </div>
+      <div class="summary-item">
+        <h4>扩展方式</h4>
+        <p><strong>Pi:</strong> 事件订阅 (pi.on) + 注册式 API<br><strong>DeepAgents:</strong> Middleware 插入 + Profile 覆盖</p>
+      </div>
+      <div class="summary-item">
+        <h4>测试策略</h4>
+        <p><strong>Pi:</strong> AgentLoop 纯函数易于单元测试<br><strong>DeepAgents:</strong> 依赖 LangGraph runtime 集成测试</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background: var(--pi)"></div> Pi 组件</div>
+    <div class="legend-item"><div class="legend-dot" style="background: var(--da)"></div> DeepAgents 组件</div>
+    <div class="legend-item"><div class="legend-dot" style="background: var(--border)"></div> 点击卡片展开详情</div>
+  </div>
+</div>
+
+<script>
+  function toggle(el) { el.classList.toggle('expanded'); }
+</script>
+</body>
+</html>

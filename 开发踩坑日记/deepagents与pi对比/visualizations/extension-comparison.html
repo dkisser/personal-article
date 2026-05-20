@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>扩展机制对比 — Pi vs DeepAgents</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #FDFCF8; --fg: #2C2C24; --pi: #5D7052; --da: #6B8FA8; --border: #DED8CF; --muted: #78786C; --card: #FEFEFA; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--fg); min-height: 100vh; padding: 40px 20px; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 36px; }
+  header h1 { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 600; }
+  header h1 em { font-style: italic; color: var(--pi); }
+  header p { color: var(--muted); margin-top: 8px; font-size: 0.9rem; }
+
+  .philosophy-banner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 36px;
+  }
+  @media (max-width: 768px) { .philosophy-banner { grid-template-columns: 1fr; } }
+  .philo-card {
+    background: var(--card); border: 1.5px solid var(--border); border-radius: 1.5rem;
+    padding: 24px; position: relative; overflow: hidden;
+  }
+  .philo-card.pi { border-left: 4px solid var(--pi); }
+  .philo-card.da { border-left: 4px solid var(--da); }
+  .philo-card h3 { font-family: 'Fraunces', serif; font-size: 1.1rem; margin-bottom: 8px; }
+  .philo-card.pi h3 { color: var(--pi); }
+  .philo-card.da h3 { color: var(--da); }
+  .philo-card .quote { font-style: italic; font-size: 0.95rem; color: var(--fg); line-height: 1.6; }
+  .philo-card .sub { font-size: 0.78rem; color: var(--muted); margin-top: 8px; }
+
+  .section-title { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 600; margin: 36px 0 20px; text-align: center; }
+
+  .comparison-table {
+    width: 100%; border-collapse: separate; border-spacing: 0; margin-bottom: 28px;
+    font-size: 0.85rem; background: var(--card); border-radius: 1.5rem; overflow: hidden;
+    border: 1.5px solid var(--border);
+  }
+  .comparison-table th {
+    background: rgba(222,216,207,0.3); padding: 14px 16px; text-align: left; font-weight: 600;
+    font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted);
+  }
+  .comparison-table th:first-child { border-radius: 1.5rem 0 0 0; }
+  .comparison-table th:last-child { border-radius: 0 1.5rem 0 0; }
+  .comparison-table td { padding: 14px 16px; border-top: 1px solid rgba(222,216,207,0.4); vertical-align: top; line-height: 1.6; }
+  .comparison-table tr:hover td { background: rgba(222,216,207,0.15); }
+  .comparison-table .dim { color: var(--muted); font-size: 0.78rem; }
+  .comparison-table code {
+    background: rgba(222,216,207,0.3); padding: 2px 6px; border-radius: 4px; font-size: 0.76rem;
+    font-family: 'Nunito', monospace;
+  }
+  .comparison-table .pi-col { border-left: 3px solid var(--pi); }
+  .comparison-table .da-col { border-left: 3px solid var(--da); }
+
+  .flow-section { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px; }
+  @media (max-width: 900px) { .flow-section { grid-template-columns: 1fr; } }
+  .flow-card {
+    background: var(--card); border: 1.5px solid var(--border); border-radius: 1.5rem; padding: 24px;
+  }
+  .flow-card h3 { font-family: 'Fraunces', serif; font-size: 1.05rem; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+  .flow-card.pi h3 { color: var(--pi); }
+  .flow-card.da h3 { color: var(--da); }
+  .flow-card .dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  .flow-node {
+    display: flex; align-items: center; gap: 12px; padding: 10px 14px;
+    border-radius: 0.8rem; background: rgba(222,216,207,0.2); margin-bottom: 8px;
+    font-size: 0.82rem; transition: all 0.3s ease;
+  }
+  .flow-node:hover { transform: translateX(4px); }
+  .flow-node .num { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; color: white; flex-shrink: 0; }
+  .flow-node.pi .num { background: var(--pi); }
+  .flow-node.da .num { background: var(--da); }
+  .flow-node .label { font-weight: 600; }
+  .flow-node .desc { color: var(--muted); font-size: 0.75rem; }
+  .flow-arrow { text-align: center; color: var(--muted); font-size: 0.7rem; margin: 4px 0; }
+
+  .highlight-box {
+    background: var(--card); border: 1.5px solid var(--border); border-radius: 1.5rem;
+    padding: 24px; margin-top: 24px;
+  }
+  .highlight-box h3 { font-family: 'Fraunces', serif; font-size: 1.1rem; margin-bottom: 14px; }
+  .highlight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .highlight-item { padding: 14px; background: rgba(222,216,207,0.15); border-radius: 1rem; }
+  .highlight-item h4 { font-size: 0.8rem; color: var(--muted); margin-bottom: 6px; }
+  .highlight-item p { font-size: 0.82rem; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Extension <em>Mechanism</em></h1>
+    <p>Pi 事件驱动扩展 vs DeepAgents Middleware 堆栈扩展</p>
+  </header>
+
+  <div class="philosophy-banner">
+    <div class="philo-card pi">
+      <h3>Pi 扩展哲学</h3>
+      <div class="quote">"事件驱动 + 注册式 API + 可拦截的生命周期钩子"</div>
+      <div class="sub">扩展不是继承或修改核心代码，而是通过事件订阅和行为注入来扩展能力</div>
+    </div>
+    <div class="philo-card da">
+      <h3>DeepAgents 扩展哲学</h3>
+      <div class="quote">"Middleware 插入 + Profile 覆盖 + 协议实现"</div>
+      <div class="sub">扩展通过插入 Middleware 到堆栈、注册 Profile 调优行为、实现协议接口来扩展能力</div>
+    </div>
+  </div>
+
+  <div class="section-title">扩展方式对比表</div>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>扩展维度</th>
+        <th class="pi-col">Pi</th>
+        <th class="da-col">DeepAgents</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>核心扩展模式</strong></td>
+        <td class="pi-col">事件订阅 (<code>pi.on(event, handler)</code>) + 注册式 API</td>
+        <td class="da-col">Middleware 插入 (<code>AgentMiddleware</code>) + Profile 注册</td>
+      </tr>
+      <tr>
+        <td><strong>工具扩展</strong></td>
+        <td class="pi-col"><code>registerTool(tool: ToolDefinition)</code><br>TypeBox schema + execute 函数</td>
+        <td class="da-col"><code>tools=[my_tool]</code> 参数<br>LangChain BaseTool / <code>@tool</code> 装饰器</td>
+      </tr>
+      <tr>
+        <td><strong>命令扩展</strong></td>
+        <td class="pi-col"><code>registerCommand(name, options)</code><br>支持 handler + UI 交互</td>
+        <td class="da-col">Slash commands (CLI 层)<br><code>SlashCommand</code> 注册到 <code>COMMANDS</code> tuple</td>
+      </tr>
+      <tr>
+        <td><strong>模型扩展</strong></td>
+        <td class="pi-col">修改 6+ 文件 (AGENTS.md 有详细指南)<br>Lazy registration 动态加载</td>
+        <td class="da-col">安装 <code>langchain-provider</code> 包<br><code>init_chat_model("provider:model")</code></td>
+      </tr>
+      <tr>
+        <td><strong>拦截能力</strong></td>
+        <td class="pi-col">极强 — 任意事件可 cancel / 修改 payload<br><code>beforeToolCall</code> 可 block 执行</td>
+        <td class="da-col">中等 — Middleware <code>on_request/on_response</code> 拦截<br>无法 cancel 已发出的 LLM 请求</td>
+      </tr>
+      <tr>
+        <td><strong>UI 扩展</strong></td>
+        <td class="pi-col">丰富 — widget, overlay, theme, status bar<br><code>select/confirm/input/notify</code></td>
+        <td class="da-col">有限 — 在 Textual 框架内自定义<br>App.notify, Content 渲染</td>
+      </tr>
+      <tr>
+        <td><strong>状态持久化扩展</strong></td>
+        <td class="pi-col"><code>appendEntry(type, data)</code> 自定义 entry<br>会话树分支持久化 (JSONL)</td>
+        <td class="da-col">实现 <code>BackendProtocol</code> 替换存储<br>Checkpointer 原生支持</td>
+      </tr>
+      <tr>
+        <td><strong>生命周期事件数</strong></td>
+        <td class="pi-col">20+ 事件 (7 大类)<br>Session / Agent / Turn / Message / Tool / Input / Resource</td>
+        <td class="da-col">2 个拦截点<br><code>on_model_request / on_model_response</code></td>
+      </tr>
+      <tr>
+        <td><strong>扩展加载方式</strong></td>
+        <td class="pi-col">运行时 jiti 编译 TypeScript<br>虚拟模块提供核心包访问</td>
+        <td class="da-col">Python import 系统<br>Middleware 实例传入参数</td>
+      </tr>
+      <tr>
+        <td><strong>Skills 系统</strong></td>
+        <td class="pi-col">通过扩展系统加载<br>SKILL.md YAML frontmatter</td>
+        <td class="da-col"><code>SkillsMiddleware(backend, sources)</code><br>SKILL.md YAML frontmatter</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="section-title">扩展介入流程</div>
+  <div class="flow-section">
+    <div class="flow-card pi">
+      <h3><div class="dot" style="background:var(--pi)"></div> Pi 扩展介入点</h3>
+      <div class="flow-node pi"><div class="num">1</div><div><div class="label">resources_discover</div><div class="desc">启动时收集 skills/prompts/themes</div></div></div>
+      <div class="flow-arrow">&#9660;</div>
+      <div class="flow-node pi"><div class="num">2</div><div><div class="label">session_start</div><div class="desc">会话初始化，扩展恢复状态</div></div></div>
+      <div class="flow-arrow">&#9660;</div>
+      <div class="flow-node pi"><div class="num">3</div><div><div class="label">input / before_agent_start</div><div class="desc">可修改 system prompt / 注入消息</div></div></div>
+      <div class="flow-arrow">&#9660;</div>
+      <div class="flow-node pi"><div class="num">4</div><div><div class="label">context</div><div class="desc">每次 LLM 调用前，可修改 messages</div></div></div>
+      <div class="flow-arrow">&#9660;</div>
+      <div class="flow-node pi"><div class="num">5</div><div><div class="label">before_provider_request</div><div class="desc">请求发送前，可修改 payload</div></div></div>
+      <div class="flow-arrow">&#9660;</div>
+      <div class="flow-node pi"><div class="num">6</div><div><div class="label">message_start → update → end</div><div class="desc">流式消息生命周期</div></div></div>
+      <div class="flow-arrow">&#9660;</div>
+      <div class="flow-node pi"><div class="num">7</div><div><div class="label">tool_call → tool_result</div><div class="desc">工具调用前可 block / 结果后可修改</div></div></div>
+      <div class="flow-arrow">&#9660;</div>
+      <div class="flow-node pi"><div class="num">8</div><div><div class="label">session_before_compact</div><div class="desc">可完全替换压缩逻辑或 cancel</div></div></div>
+    </div>
+
+    <div class="flow-card da">
+      <h3><div class="dot" style="background:var(--da)"></div> DeepAgents 扩展介入点</h3>
+      <div class="flow-node da"><div class="num">1</div><div><div class="label">create_deep_agent()</div><div class="desc">Middleware 堆栈组装</div></div></div>
+      <div class="flow-arrow">&#9660;</div>
+      <div class="flow-node da"><div class="num">2</div><div><div class="label">TodoListMiddleware</div><div class="desc">待办管理 (可排除)</div></div></div>
+      <div class="flow-arrow">&#9660;</div>
+      <div class="flow-node da"><div class="num">3</div><div><div class="label">SkillsMiddleware</div><div class="desc">Skills 加载注入 system prompt</div></div></div>
+      <div class="flow-arrow">&#9660;</div>
+      <div class="flow-node da"><div class="num">4</div><div><div class="label">FilesystemMiddleware</div><div class="desc">文件工具 + 权限控制</div></div></div>
+      <div class="flow-arrow">&#9660;</div>
+      <div class="flow-node da"><div class="num">5</div><div><div class="label">User Middleware</div><div class="desc">自定义 middleware 插入位置</div></div></div>
+      <div class="flow-arrow">&#9660;</div>
+      <div class="flow-node da"><div class="num">6</div><div><div class="label">LLM Call (create_agent)</div><div class="desc">Middleware on_request / on_response</div></div></div>
+      <div class="flow-arrow">&#9660;</div>
+      <div class="flow-node da"><div class="num">7</div><div><div class="label">ToolNode</div><div class="desc">工具执行 (可被 middleware 拦截)</div></div></div>
+      <div class="flow-arrow">&#9660;</div>
+      <div class="flow-node da"><div class="num">8</div><div><div class="label">SummarizationMiddleware</div><div class="desc">上下文自动摘要</div></div></div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <h3>关键差异总结</h3>
+    <div class="highlight-grid">
+      <div class="highlight-item">
+        <h4>扩展粒度</h4>
+        <p><strong>Pi</strong> 提供事件级别细粒度控制 (text_delta 级别)<br><strong>DeepAgents</strong> 提供请求/响应级别控制</p>
+      </div>
+      <div class="highlight-item">
+        <h4>拦截能力</h4>
+        <p><strong>Pi</strong> 任意事件可 cancel 或替换逻辑<br><strong>DeepAgents</strong> Middleware 可修改但无法 cancel 已发出请求</p>
+      </div>
+      <div class="highlight-item">
+        <h4>组合方式</h4>
+        <p><strong>Pi</strong> 多扩展通过事件监听器叠加<br><strong>DeepAgents</strong> Middleware 通过堆栈顺序组合</p>
+      </div>
+      <div class="highlight-item">
+        <h4>开发体验</h4>
+        <p><strong>Pi</strong> 需要理解事件系统和 TypeBox<br><strong>DeepAgents</strong> 需要理解 LangChain 生态和 Pydantic</p>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
