@@ -1,48 +1,17 @@
 ---
 title: "「“精细控制”和“开箱即用”的Agent开发路线」"
+source: "https://note.mowen.cn/detail/mNvHfXcp0ESP9oHqvjHGF"
 author:
-  - Paul
 published: 2026-05-16
 created: 2026-05-16
-description: "本文介绍了Agent开发的两种路线：Pi追求极致性能与自由扩展，适合学习；DeepAgents追求开箱即用，适合快速开发。作者建议，一般需求可通过Skill解决，仅在需要自主规划并作为云端服务时才自研Agent。 "
+description: "本文对比了两个Agent开发框架：Pi（TypeScript）注重极致性能与高自由度扩展，适合学习；DeepAgents（Python）开箱即用、抽象程度高，适合快速开发。建议学习选Pi，时间紧选DeepAgents。 "
 tags:
-  - Agent开发
-  - 开源框架
-  - 技术对比
+  - "Agent开发"
+  - "Pi"
+  - "DeepAgents"
 status: "published"
-channels:
-  - name: 墨问
-    url: https://note.mowen.cn/detail/mNvHfXcp0ESP9oHqvjHGF
-    views: 0
-    likes: 0
-    collects: 0
-    comments: 0
-    published_at: 2026-05-16
-  - name: CSDN
-    url: https://blog.csdn.net/Dkisser/article/details/161142396
-    views: 0
-    likes: 0
-    collects: 0
-    comments: 0
-    published_at: 2026-05-16
-  - name: infoQ
-    url: https://xie.infoq.cn/preview/article/5b9a6fe46a67b563245d13e32bb3e8d9
-    views: 0
-    likes: 0
-    collects: 0
-    comments: 0
-    published_at: 2026-05-16
-  - name: 知乎
-    url: https://zhuanlan.zhihu.com/p/2038985652897895985
-    views: 0
-    likes: 0
-    collects: 0
-    comments: 0
-    published_at: 2026-05-16
-source: "https://note.mowen.cn/detail/mNvHfXcp0ESP9oHqvjHGF"
 ---
-
-## 「“精细控制”和“开箱即用”的Agent开发路线」
+## 「“精细控制”和“开箱即用”的Agent开发路线」 · 墨问
 
 「“精细控制”和“开箱即用”的Agent开发路线」
 
@@ -66,13 +35,13 @@ Agent要定制肯定不需要重头去写（除非你要极致的性能），我
 
 同时，在此基础上，提供了20+个扩展点，可以在任意时刻进行拦截或修改。（以下是各个扩展点，从1开始按照顺序往后）
 
-![](https://priv-sdn-001.mowen.cn/mo/file/meta/79/94/69/2055527890673164289.png?Expires=1778997414&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=VHpdRNm%2ByqxDazWo1C%2BcL2YZXjs%3D&response-expires=Sun%2C%2017%20May%202026%2005%3A56%3A54%20GMT&x-oss-process=image%2Fresize%2Cw_1200)
+![](../images/精细控制-和-开箱即用-的agent开发路线/image-1.png)
 
 **Run Fast And Run First**
 
 简单来说就是开箱即用，抽象程度很高。不需要你懂太多Agent运行的各个实际，你只需要告诉我Tools + LLM Provider + 内置功能（todo、skills、subagents、compaction、human in loop等等）
 
-![](https://priv-sdn-001.mowen.cn/mo/file/meta/10/56/17/2055527890673164290.png?Expires=1778997414&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=8naVoA52jcE8Yrld4zq1G1t9by0%3D&response-expires=Sun%2C%2017%20May%202026%2005%3A56%3A54%20GMT&x-oss-process=image%2Fresize%2Cw_1200) ![](https://priv-sdn-001.mowen.cn/mo/file/meta/16/83/22/2055529241025028098.png?Expires=1778997736&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=YltxoDKDwVfwzlH7eY%2FzbucvaZ4%3D&response-expires=Sun%2C%2017%20May%202026%2006%3A02%3A16%20GMT&x-oss-process=image%2Fresize%2Cw_1200) ![](https://priv-sdn-001.mowen.cn/mo/file/meta/11/86/80/2055529241025028097.png?Expires=1778997736&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=gM8B6hpivHlY4sASdGBxrZF%2B3HI%3D&response-expires=Sun%2C%2017%20May%202026%2006%3A02%3A16%20GMT&x-oss-process=image%2Fresize%2Cw_1200)
+![](../images/精细控制-和-开箱即用-的agent开发路线/image-2.png) ![](../images/精细控制-和-开箱即用-的agent开发路线/image-3.png) ![](../images/精细控制-和-开箱即用-的agent开发路线/image-4.png)
 
 Pi确实很简单，但是要构建一个Agent出来需要极强的软件设计能力，你需要明确知道你需要什么功能以及这些功能如何做。但好在Pi维护了一个社区，里面很多基于Pi的扩展包.
 
@@ -86,6 +55,12 @@ Pi 插件社区： [https://pi.dev/packages](https://pi.dev/packages)
 
 DeepAgents: [https://github.com/langchain-ai/deepagents](https://github.com/langchain-ai/deepagents)
 
+0
 
+0
+
+0
+
+\\n
 
 <iframe src="chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/side-panel.html?context=iframe"></iframe>

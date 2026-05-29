@@ -4,9 +4,9 @@ source: "https://note.mowen.cn/detail/jHXC-7Pxpq5DZ5CURGpjd"
 author:
 published: 2026-05-20
 created: 2026-05-20
-description: "文章讨论了云端Agent如何利用本地浏览器的方案。核心是通过WebSocket连接：云端作为服务端，本地作为客户端，中间引入MCP Server。重点在于WebSocket连接的管理，包括建立、销毁、安全认证以及不同session间的冲突避免。 "
+description: "文章探讨云端Agent如何通过WebSocket让用户本地浏览器被云端使用。核心是用户在本地和云端各运行一个WebSocket管理后台进程，云端作为服务端推送消息，本地客户端连接并控制浏览器。文章还讨论了WebSocket连接管理、安全性、session冲突等设计问题。 "
 tags:
-  - "云端Agent"
+  - "Agent"
   - "WebSocket"
   - "浏览器控制"
 status: "published"
@@ -21,7 +21,7 @@ status: "published"
 
 **云端Agent使用你的浏览器并不是不可以，做起来也不麻烦。**
 
-![](https://priv-sdn-001.mowen.cn/mo/file/meta/16/07/18/2056929044727988225.png?Expires=1779331475&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=JiJbaG7gBt9FdSgGJBxiYCHYT%2Bc%3D&response-expires=Thu%2C%2021%20May%202026%2002%3A44%3A35%20GMT&x-oss-process=image%2Fresize%2Cw_1200)
+![](../images/云端agent如何使用你本地机器的浏览器/image-1.png)
 
 （我一下子没画出来什么好图，将就着看吧~~）
 
@@ -35,7 +35,7 @@ status: "published"
 
 云端 Agent -> MCP Server -> WebSocket(Server) -> WebSocket(Local) -> Chrome
 
-![](https://priv-sdn-001.mowen.cn/mo/file/meta/24/48/69/2056929044727988226.png?Expires=1779331475&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=tf8TNKmAbI1rcYG9RZ3R0WVqWB8%3D&response-expires=Thu%2C%2021%20May%202026%2002%3A44%3A35%20GMT&x-oss-process=image%2Fresize%2Cw_1200)
+![](../images/云端agent如何使用你本地机器的浏览器/image-2.png)
 
 从右往左看
 

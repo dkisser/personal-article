@@ -2,12 +2,12 @@
 title: "「Agent在控制你的浏览器会话」"
 source: "https://note.mowen.cn/detail/o-MM5LJ9ghbJHTBAU1PRF"
 author:
-published: 2026-05-20
-created: 2026-05-20
-description: "本文解释了AI Agent通过Chrome扩展控制浏览器会话的原理，依赖于Chrome Native Messaging技术，扩展启动本地进程转发MCP指令，同时提供用户可见的控制开关。 "
+published: 2026-05-18
+created: 2026-05-18
+description: "文章介绍Agent如何通过Chrome Native Messaging技术控制用户浏览器会话。直接使用chrome-devtools-mcp会打开无登录态的新实例，而通过Chrome Extension（如Codex和Qoder）可以保留用户真实身份。Extension启动Native Host进程，接收MCP Server指令并通过Native Messaging转发给Chrome，实现访问网页、获取内容、执行JS等操作。这种设计警示用户AI正在使用其身份上网，并允许手动中断。 "
 tags:
-  - "AI Agent"
-  - "Chrome扩展"
+  - "Agent"
+  - "Chrome Extension"
   - "Native Messaging"
 status: "published"
 ---
@@ -25,7 +25,7 @@ status: "published"
 
 Codex 和 Qoder 也想到了这个问题，他们提供了浏览器插件来解决这个问题。而这些 Agent Chrome Extension 背后的原理并不复杂。 **关键就在于一项 2013年就诞生的技术，Chrome Native Messaging。**
 
-![](https://priv-sdn-001.mowen.cn/mo/file/meta/43/21/14/2056396687344492546.png?Expires=1779291943&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=RcC4yZqDhP5nD7UVQwvRH%2FBkSrs%3D&response-expires=Wed%2C%2020%20May%202026%2015%3A45%3A43%20GMT&x-oss-process=image%2Fresize%2Cw_1200)
+![](../images/agent在控制你的浏览器会话/image-1.png)
 
 唯一需要解释的就是这个 Native Host。 **当开启了Chrome Extension之后，Native Host文件就会运行，它会启动一个本地辅助进程，负责接收 MCP Server的指令，并通过 Chrome Native Messaging 转发送给 Chrome** 。
 
@@ -39,7 +39,7 @@ Chrome Extension的职责好简单，就负责启动一个后台程序，接受 
 
 至于来不来得及阻止，那就看手速啦~
 
-![](https://priv-sdn-001.mowen.cn/mo/file/meta/16/78/31/2056396687344492545.png?Expires=1779327507&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=5OLLOSH6iDToaSWwWJsl68YADNs%3D&response-expires=Thu%2C%2021%20May%202026%2001%3A38%3A27%20GMT&x-oss-process=image%2Fresize%2Cw_1200)
+![](../images/agent在控制你的浏览器会话/image-2.png)
 
 \---参考文档
 
@@ -52,7 +52,5 @@ Chrome Extension的职责好简单，就负责启动一个后台程序，接受 
 0
 
 \\n
-
-保存成功
 
 <iframe src="chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/side-panel.html?context=iframe"></iframe>

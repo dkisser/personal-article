@@ -1,46 +1,17 @@
 ---
-title: 浅浅地试了试 EvoMap，说说我的看法
-source: https://note.mowen.cn/detail/g0SyCmrUhK8sSKHUy703p
-author: Paul
-published: 2026-05-15
-created: 2026-05-15
-description: "作者介绍了EvoMap，它是一个针对具体问题的解决方案库，涵盖复杂系统、应用加速、OOM修复等。作者三年前曾有类似想法但放弃，原因是方案效果难验证和激励机制缺失。如今Agent时代降低了验证负担，EvoMap通过悬赏机制激励分享。但作者认为简单问题无需此工具，且价值尚不明确，或许在海量Agent场景下更有效。 "
+title: "浅浅地试了试 EvoMap，说说我的看法"
+source: "https://note.mowen.cn/detail/g0SyCmrUhK8sSKHUy703p"
+author:
+published: 2026-05-14
+created: 2026-05-14
+description: "用户“叫我Paul就好”试用EvoMap后认为它是一个解决方案库，包含针对具体问题的SKILL、代码片段或Prompt。他三年前想为Java程序员建类似社区，但当时无法判断方案效果且奖惩机制不明，故放弃。现在Agent时代降低认知负担，EvoMap通过悬赏激励分享。但他怀疑其价值：简单问题无需用它，复杂问题也可能解决不了，当前感受不到直观作用。 "
 tags:
-  - EvoMap
-  - 解决方案
-  - Agent时代
-status: published
-channels:
-  - name: 墨问
-    url: https://note.mowen.cn/detail/g0SyCmrUhK8sSKHUy703p
-    views: 0
-    likes: 0
-    collects: 0
-    comments: 0
-    published_at: 2026-05-15
-  - name: 知乎
-    url: https://zhuanlan.zhihu.com/p/2038228434019684391
-    views: 33
-    likes: 1
-    collects: 0
-    comments: 0
-    published_at: 2026-05-15
-  - name: infoQ
-    url: https://xie.infoq.cn/article/54878a48e42adc2db1b29e306
-    views: 16
-    likes: 0
-    collects: 0
-    comments: 0
-    published_at: 2026-05-15
-  - name: CSDN
-    url: https://blog.csdn.net/Dkisser/article/details/161076878
-    views: 212
-    likes: 6
-    collects: 6
-    comments: 0
-    published_at: 2026-05-15
+  - "EvoMap"
+  - "解决方案"
+  - "看法"
+status: "published"
 ---
-## 浅浅地试了试 EvoMap，说说我的看法 
+## 浅浅地试了试 EvoMap，说说我的看法 · 墨问
 
 **浅浅地试了试 EvoMap，说说我的看法**
 
@@ -50,7 +21,7 @@ EvoMap给我的第一印象，是一个解决方案库，里面是一个个针�
 
 可以是做一个复杂的系统，也可以是针对应用程序进行冷启动加速、OOM问题修复，甚至是生成代码规则等等。
 
-![](https://priv-sdn-001.mowen.cn/mo/file/meta/11/29/52/2054771671318089729.png?Expires=1778904176&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=hJlCLIx5lXSWLYpU%2FktuUl0U6M4%3D&response-expires=Sat%2C%2016%20May%202026%2004%3A02%3A56%20GMT&x-oss-process=image%2Fresize%2Cw_1200)
+![](../images/浅浅地试了试-evomap-说说我的看法/image-1.png)
 
 最热门的Capsule
 
@@ -58,7 +29,7 @@ EvoMap给我的第一印象，是一个解决方案库，里面是一个个针�
 
 可以是一个SKILL，也可以是代码片段，或者一段Prompt等等。
 
-![](https://priv-sdn-001.mowen.cn/mo/file/meta/10/00/17/2054771671318089731.png?Expires=1778904183&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=28o%2F4da76AwbHU3Sizwqrnk0dNo%3D&response-expires=Sat%2C%2016%20May%202026%2004%3A03%3A03%20GMT&x-oss-process=image%2Fresize%2Cw_1200)
+![](../images/浅浅地试了试-evomap-说说我的看法/image-2.png)
 
 在三年前我有个类似的想法，想做一个针对Java程序员的一个解决方案的社区。可以分享系统设计、应用运维、问题排查的解决方案。
 
@@ -94,7 +65,7 @@ Agent时代，在解决SDK兼容问题时我们的认知负担大大降低了。
 
 或许当你真的拥有上百万的agent时，通过它沉淀的经验来提效很ok。至于现在，对我来说不同agent之间遇到的问题大都不太相同，我还无法直观地体会实际的价值。
 
-![](https://priv-sdn-001.mowen.cn/mo/file/meta/15/32/17/2054771671318089730.png?Expires=1778904183&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=1rxKFw97BJmTEiICvG9vyBscPt0%3D&response-expires=Sat%2C%2016%20May%202026%2004%3A03%3A03%20GMT&x-oss-process=image%2Fresize%2Cw_1200)
+![](../images/浅浅地试了试-evomap-说说我的看法/image-3.png)
 
 0
 

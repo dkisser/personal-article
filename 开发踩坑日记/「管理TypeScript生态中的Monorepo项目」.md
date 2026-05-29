@@ -1,15 +1,15 @@
 ---
-title: 「管理TypeScript生态中的Monorepo项目」
-source: https://note.mowen.cn/detail/LK18AQAcqaGn5VIrPLv3w
+title: "「管理TypeScript生态中的Monorepo项目」"
+source: "https://note.mowen.cn/detail/LK18AQAcqaGn5VIrPLv3w"
 author:
-published: 2026-05-24
-created: 2026-05-24
-description: "文章介绍了作者对Monorepo（多模块仓库）的探索过程，从困惑到理解其在TypeScript生态中的实践。通过pnpm、turbo、vite、jest等工具管理依赖和任务。作者反思了前端项目常见的代码混乱问题，认为前端常被视作易耗品，并吐槽工具链过于复杂。 "
+published: 2026-05-22
+created: 2026-05-22
+description: "本文探讨了TypeScript生态中的Monorepo管理方式，回顾了依赖管理、任务编排、打包、测试等行业工具（pnpm、turbo、vite、jest），并通过npx create-turbo演示了极简搭建过程。作者反思了前端项目常见混乱问题，对比后端项目，指出前端常被视为易耗品，并介绍了Bun等工具旨在整合前端工具链的努力。 "
 tags:
-  - Monorepo
-  - TypeScript
-  - 前端工程化
-status: published
+  - "Monorepo"
+  - "TypeScript"
+  - "前端工具链"
+status: "published"
 ---
 ## 「管理TypeScript生态中的Monorepo项目」 · 墨问
 
@@ -45,7 +45,7 @@ npx create-turbo@latest my-backend-monorepo --example basic
 
 你完全可以把 `apps/docs` 重命名为 `api` 或 `service` ，改成你自己的后端应用（比如 Fastify、Express 或纯 Node.js）。
 
-![](https://priv-sdn-001.mowen.cn/mo/file/meta/15/22/20/2058372989115072513.png?Expires=1779762707&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=HZRAuzUcTN8I5Wr8DGLjX00gmso%3D&response-expires=Tue%2C%2026%20May%202026%2002%3A31%3A47%20GMT&x-oss-process=image%2Fresize%2Cw_1200)
+![](../images/管理typescript生态中的monorepo项目/image-1.png)
 
 **Monorepo的管理优势**
 
