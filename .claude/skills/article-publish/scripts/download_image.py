@@ -69,7 +69,7 @@ def download_image(url: str, output_dir: str) -> str | None:
     """
     os.makedirs(output_dir, exist_ok=True)
 
-    for attempt, delay in enumerate(RETRY_DELAYS):
+    for attempt in range(len(RETRY_DELAYS) + 1):
         try:
             response = requests.get(
                 url,
@@ -80,8 +80,8 @@ def download_image(url: str, output_dir: str) -> str | None:
             break
         except Exception as e:
             _log("error", f"Attempt {attempt + 1} failed: {e}")
-            if attempt < len(RETRY_DELAYS) - 1:
-                time.sleep(delay)
+            if attempt < len(RETRY_DELAYS):
+                time.sleep(RETRY_DELAYS[attempt])
             else:
                 _log("error", "All retries exhausted")
                 return None
@@ -89,8 +89,6 @@ def download_image(url: str, output_dir: str) -> str | None:
         return None
 
     ext = infer_extension(response.headers, url)
-    filepath = generate_filename(output_dir, ext)
-    basename = os.path.basename(filepath)
 
     content = response.content
     content_length = len(content)
@@ -99,10 +97,14 @@ def download_image(url: str, output_dir: str) -> str | None:
         existing_path = os.path.join(output_dir, existing)
         if (
             os.path.isfile(existing_path)
+            and os.path.splitext(existing_path)[1].lower() == ext.lower()
             and os.path.getsize(existing_path) == content_length
         ):
-            _log("skip", f"{basename} already exists as {existing}")
+            _log("skip", f"{os.path.basename(existing_path)} already exists")
             return existing_path
+
+    filepath = generate_filename(output_dir, ext)
+    basename = os.path.basename(filepath)
 
     _log("download", f"{url} -> {basename}")
     with open(filepath, "wb") as f:

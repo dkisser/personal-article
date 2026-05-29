@@ -8,7 +8,7 @@ from unittest.mock import Mock, patch
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from download_image import infer_extension, generate_filename, download_image
+from download_image import infer_extension, generate_filename, download_image, main
 
 
 class TestInferExtension(unittest.TestCase):
@@ -117,7 +117,75 @@ class TestDownloadImage(unittest.TestCase):
         result = download_image("http://example.com/img.png", self.tmpdir)
 
         self.assertIsNone(result)
+        self.assertEqual(mock_get.call_count, 4)
+
+    @patch("download_image.requests.get")
+    def test_retry_third_attempt_succeeds(self, mock_get):
+        """First two attempts fail, third retry succeeds."""
+        mock_response = Mock()
+        mock_response.status_code = 200
+        mock_response.headers = {"Content-Type": "image/png"}
+        mock_response.content = b"fake-image-data"
+
+        mock_get.side_effect = [
+            Exception("Connection refused"),
+            Exception("Timeout"),
+            mock_response,
+        ]
+
+        result = download_image("http://example.com/img.png", self.tmpdir)
+
+        self.assertIsNotNone(result)
         self.assertEqual(mock_get.call_count, 3)
+        self.assertEqual(os.path.basename(result), "image-1.png")
+
+    @patch("download_image.requests.get")
+    def test_user_agent_header_sent(self, mock_get):
+        """User-Agent header is sent with the request."""
+        mock_response = Mock()
+        mock_response.status_code = 200
+        mock_response.headers = {"Content-Type": "image/png"}
+        mock_response.content = b"fake-image-data"
+        mock_get.return_value = mock_response
+
+        download_image("http://example.com/img.png", self.tmpdir)
+
+        mock_get.assert_called_once()
+        call_kwargs = mock_get.call_args.kwargs
+        self.assertIn("User-Agent", call_kwargs["headers"])
+        self.assertTrue(call_kwargs["headers"]["User-Agent"].startswith("Mozilla/5.0"))
+
+
+class TestMain(unittest.TestCase):
+    """Tests for main() CLI entry point."""
+
+    @patch("download_image.requests.get")
+    def test_main_correct_args(self, mock_get):
+        """main() with correct args exits 0 and prints path."""
+        mock_response = Mock()
+        mock_response.status_code = 200
+        mock_response.headers = {"Content-Type": "image/png"}
+        mock_response.content = b"fake-image-data"
+        mock_get.return_value = mock_response
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            test_args = [
+                "download_image.py",
+                "http://example.com/img.png",
+                tmpdir,
+            ]
+            with patch.object(sys, "argv", test_args):
+                exit_code = main()
+
+        self.assertEqual(exit_code, 0)
+
+    def test_main_wrong_arg_count(self):
+        """main() with wrong arg count exits 1."""
+        test_args = ["download_image.py", "http://example.com/img.png"]
+        with patch.object(sys, "argv", test_args):
+            exit_code = main()
+
+        self.assertEqual(exit_code, 1)
 
 
 if __name__ == "__main__":
