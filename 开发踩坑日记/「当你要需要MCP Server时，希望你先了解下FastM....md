@@ -21,7 +21,7 @@ Codex 前段时间发布了一个能够让 Agent 完全控制浏览器（并继�
 
 实现所需的技术栈主要就是 Chrome Native Messaging，之前提到过了就不再赘述了。只需要实现下面的功能就好。（我发现有人在pi社区已经做了类似的事儿，可以参考 [https://pi.dev/packages/pi-chrome?name=chrome](https://pi.dev/packages/pi-chrome?name=chrome) ）
 
-![](https://priv-sdn-001.mowen.cn/mo/file/meta/72/29/96/2060198638129446914.png?Expires=1780111007&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=qwBffZ1%2BIz4lP67t7JYixZdz7UU%3D&response-expires=Sat%2C%2030%20May%202026%2003%3A16%3A47%20GMT&x-oss-process=image%2Fresize%2Cw_1200)
+![](images/当你要需要mcp-server时希望你先了解下fastmcp/image-1.png)
 
 今天主要聊的是 Python 生态下和 Agent 之间的集成工具。
 
@@ -47,7 +47,7 @@ Python生态中原生的mcp也能很好的实现。但是，你让AI自己去实
 
 Coding Agent有幻觉，因为大部分的模型知识只到 2025 年 5月左右。让 Agent 自己设计方案的时候，很可能会采用 **SSE的方案，这个是明确已经被弃用了的，要注意** 。
 
-![](https://priv-sdn-001.mowen.cn/mo/file/meta/10/28/34/2060198638129446913.png?Expires=1780111007&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=FkQYyrW4FBVhVs3eJynINEirCBM%3D&response-expires=Sat%2C%2030%20May%202026%2003%3A16%3A47%20GMT&x-oss-process=image%2Fresize%2Cw_1200)
+![](images/当你要需要mcp-server时希望你先了解下fastmcp/image-2.png)
 
 0
 
