@@ -16,6 +16,7 @@
 - [[浅浅地试了试 EvoMap，说说我的看法]] — 对 EvoMap 解决方案库的初步体验与思考，讨论 Agent 时代下知识沉淀与悬赏机制的价值。
 - [[「Agent在控制你的浏览器会话"]] — 解释AI Agent如何通过Chrome扩展和Native Messaging技术控制浏览器会话，并提供安全开关让用户可见可控。
 - [[「云端Agent如何使用你本地机器的浏览器？"]] — 探讨云端Agent通过WebSocket连接使用本地浏览器的方案，核心挑战在于连接管理与安全认证。
+- [[「CC-Switch还真是个不错的产品」]] — CC-Switch是一个能让Coding Agent无缝切换底层LLM供应商的工具，支持Claude Code、Codex等。
 
 ---
 
