@@ -21,6 +21,8 @@
 ## 产品复刻
 
 - [[「复刻Codex浏览器插件-鉴权篇」]] — 复刻 Codex 浏览器插件，保留跨网络端点的鉴权，并讨论 Agentic Coding 的局限。
+- [[「复刻Codex浏览器插件-实现篇」]] — 复刻 Codex 插件的实现过程，分享 Monorepo 统一技术栈、Super Power 头脑风暴与 Service Worker 休眠解决方案。
+- [[「复刻Codex浏览器插件-核心设计篇」]] — 复刻 Codex 插件的核心架构，说明 WebSocket Server/Local/Extension 分工，以及去掉 Native Host 的原因。
 
 ## 经验总结
 

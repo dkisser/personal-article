@@ -4,12 +4,13 @@ source: "https://note.mowen.cn/detail/6cdQUsHtdf14VwQgtJy5v"
 author:
 published: 2026-06-14
 created: 2026-06-14
-description: "本文介绍了复刻Codex浏览器插件的实现过程。作者分享了两大教训：项目结构需使用Monorepo并统一技术栈（TypeScript），以避免通信协议不统一；利用Super Power工具进行设计头脑风暴，可发现遗漏点。还解决了Service Worker默认30秒休眠的问题，通过抽离offscreen.html维持WebSocket连接。附录中提供了详细的Browser-Bridge系统架构设计文档，包括CLI、WebSocket服务器、本地代理和Chrome扩展的架构及数据流。 "
+description: "复刻 Codex 插件的实现过程，分享 Monorepo 统一技术栈、Super Power 头脑风暴与 Service Worker 休眠解决方案。"
 tags:
   - "Codex"
   - "浏览器插件"
   - "系统架构"
 status: "published"
+category: "产品复刻"
 ---
 ## 「复刻Codex浏览器插件-实现篇」 · 墨问
 
@@ -23,7 +24,7 @@ status: "published"
 
 **这次，我用了 Monorepo，并且统一使用 ts 编写。** 把通讯协议放到共享项目目录下，这样基本不会有通讯协议的问题。（或者说在编码的时候 Agent 能直接检查出来问题，调试都不用了）
 
-![](https://priv-sdn-001.mowen.cn/mo/file/meta/13/91/65/2066094450915168257.png?Expires=1781603461&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=wUiA7WuBjG3OO1V10N7orl568Ss%3D&response-expires=Tue%2C%2016%20Jun%202026%2009%3A51%3A01%20GMT&x-oss-process=image%2Fresize%2Cw_1200)
+![](images/复刻codex浏览器插件-实现篇/image-1.png)
 
 **重大的功能使用 Super Power 还真不一样**
 
@@ -31,7 +32,7 @@ status: "published"
 
 最总要的一点是，Super Power 在新版本中添加了网页端。Agent 在给你方案的时候除了给你简短的几句话之外，还会给你举例说明（通过 http://localhost:56666可以看到 不光概念，而且还有例子及重点，分的真的很清楚，很好理解）。
 
-![](https://priv-sdn-001.mowen.cn/mo/file/meta/14/43/85/2066090769038200834.png?Expires=1781604571&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=Y%2BPJdxEJrIn%2FrZfqtJapBy41USw%3D&response-expires=Tue%2C%2016%20Jun%202026%2010%3A09%3A31%20GMT&x-oss-process=image%2Fresize%2Cw_1200) ![](https://priv-sdn-001.mowen.cn/mo/file/meta/52/81/89/2066090769038200833.png?Expires=1781604571&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=okGAazweTG0OkyxyerXvFGqJO1U%3D&response-expires=Tue%2C%2016%20Jun%202026%2010%3A09%3A31%20GMT&x-oss-process=image%2Fresize%2Cw_1200) ![](https://priv-sdn-001.mowen.cn/mo/file/meta/16/73/62/2066090769038200835.png?Expires=1781621452&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=aRu3jw1lT3A5KUfE2kMpkUUAoKg%3D&response-expires=Tue%2C%2016%20Jun%202026%2014%3A50%3A52%20GMT&x-oss-process=image%2Fresize%2Cw_1200)
+![](images/复刻codex浏览器插件-实现篇/image-2.png) ![](images/复刻codex浏览器插件-实现篇/image-3.png) ![](images/复刻codex浏览器插件-实现篇/image-4.png)
 
 1/3
 
@@ -41,7 +42,7 @@ status: "published"
 
 但今天遇到的是 Service Worker 默认30s休眠，需要单独抽离一个 offscreen.html
 
-![](https://priv-sdn-001.mowen.cn/mo/file/meta/18/25/17/2066092985387900930.png?Expires=1781604571&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=gg2%2F26DRLAhjuSCZr853pRX5B70%3D&response-expires=Tue%2C%2016%20Jun%202026%2010%3A09%3A31%20GMT&x-oss-process=image%2Fresize%2Cw_1200) ![](https://priv-sdn-001.mowen.cn/mo/file/meta/39/27/30/2066092985387900929.png?Expires=1781604571&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=%2B3PtqFAACNi3Hjcm14rZ7VrzXws%3D&response-expires=Tue%2C%2016%20Jun%202026%2010%3A09%3A31%20GMT&x-oss-process=image%2Fresize%2Cw_1200) ![](https://priv-sdn-001.mowen.cn/mo/file/meta/14/94/10/2066092985387900933.png?Expires=1781621452&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=s0o9V4gsJlbJryBtY%2BYIRpWJbeY%3D&response-expires=Tue%2C%2016%20Jun%202026%2014%3A50%3A52%20GMT&x-oss-process=image%2Fresize%2Cw_1200) ![](https://priv-sdn-001.mowen.cn/mo/file/meta/12/54/88/2066092985387900931.png?Expires=1781621452&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=hASrfpxMEfEkUP%2BFbeqP3fq3%2Bq8%3D&response-expires=Tue%2C%2016%20Jun%202026%2014%3A50%3A52%20GMT&x-oss-process=image%2Fresize%2Cw_1200) ![](https://priv-sdn-001.mowen.cn/mo/file/meta/16/00/54/2066092985387900932.png?Expires=1781604571&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=km6JlVstpJnFtHLWHjisBNmpH0c%3D&response-expires=Tue%2C%2016%20Jun%202026%2010%3A09%3A31%20GMT&x-oss-process=image%2Fresize%2Cw_1200)
+![](images/复刻codex浏览器插件-实现篇/image-5.png) ![](images/复刻codex浏览器插件-实现篇/image-6.png) ![](images/复刻codex浏览器插件-实现篇/image-7.png) ![](images/复刻codex浏览器插件-实现篇/image-8.png) ![](images/复刻codex浏览器插件-实现篇/image-9.png)
 
 1/5
 
@@ -402,16 +403,6 @@ New app \`apps/local-proxy\` to be added. \`apps/websocket\` currently contains 
 
 **show time**
 
-![](https://priv-sdn-001.mowen.cn/mo/file/meta/14/91/75/2066101610084978689.png?Expires=1781613472&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=icr9UOODNlki7ApLBBNjMWrs3iA%3D&response-expires=Tue%2C%2016%20Jun%202026%2012%3A37%3A52%20GMT&x-oss-process=image%2Fresize%2Cw_1200) ![](https://priv-sdn-001.mowen.cn/mo/file/meta/16/00/54/2066092985387900932.png?Expires=1781604571&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=km6JlVstpJnFtHLWHjisBNmpH0c%3D&response-expires=Tue%2C%2016%20Jun%202026%2010%3A09%3A31%20GMT&x-oss-process=image%2Fresize%2Cw_1200) ![](https://priv-sdn-001.mowen.cn/mo/file/meta/10/35/31/2066101610084978690.png?Expires=1781621452&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=hK1B5TjK6G9Q7VEeAZmO2dmibyw%3D&response-expires=Tue%2C%2016%20Jun%202026%2014%3A50%3A52%20GMT&x-oss-process=image%2Fresize%2Cw_1200) ![](https://priv-sdn-001.mowen.cn/mo/file/meta/32/64/26/2066101610084978691.png?Expires=1781621452&OSSAccessKeyId=LTAI5tE16jzdfWCPVBmyB5Nn&Signature=YS3x8lsGuNqqcnSrHCgOaeX%2FBgM%3D&response-expires=Tue%2C%2016%20Jun%202026%2014%3A50%3A52%20GMT&x-oss-process=image%2Fresize%2Cw_1200)
+![](images/复刻codex浏览器插件-实现篇/image-10.png) ![](images/复刻codex浏览器插件-实现篇/image-9.png) ![](images/复刻codex浏览器插件-实现篇/image-11.png) ![](images/复刻codex浏览器插件-实现篇/image-12.png)
 
 1/4
-
-0
-
-0
-
-0
-
-\\n
-
-<iframe src="chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/side-panel.html?context=iframe"></iframe>
