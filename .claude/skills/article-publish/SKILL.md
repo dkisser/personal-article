@@ -63,20 +63,39 @@ Before syncing catalogs, download any external images in the article to local st
    - Preserve alt text unchanged
 
 4. **Download each image:**
-   - Call: `python scripts/download_image.py <url> images/<slug>/`
-   - Capture stdout (local file path)
+   - Call: `python scripts/download_image.py <url> images/<slug>/` from the vault root directory
+   - Capture stdout (local file path relative to the vault root, e.g. `images/<slug>/image-1.png`)
    - If exit code is 1 (download failed), skip this image and keep the original external URL
-   - In article content, replace the external URL with the local relative path: `![](<local_path>)`
 
-5. **Save the updated article** with replaced image links.
+5. **Compute the article-relative image path and replace the link:**
+   - `download_image.py` returns a path relative to the vault root.
+   - Before writing the link into the article, convert it to a path relative to the **article file's directory** so that both Obsidian and GitHub Markdown preview resolve it correctly.
+   - Conversion rule: `article_image_path = os.path.relpath(vault_root_image_path, article_file_parent_dir)`
+   - Common cases:
+     - Article in vault root: `images/<slug>/image-1.png` stays `images/<slug>/image-1.png`
+     - Article in a first-level category folder (e.g. `产品体验与思考/`): `images/<slug>/image-1.png` becomes `../images/<slug>/image-1.png`
+   - In article content, replace the external URL with the computed relative path: `![](<article_image_path>)`
 
-**Example:**
+6. **Save the updated article** with replaced image links.
+
+**Examples:**
+
+Article in vault root:
 ```markdown
 # Before
 ![](https://priv-sdn-001.mowen.cn/.../2060198638129446914.png?Expires=...)
 
 # After
 ![](images/dang-ni-yao-xu-yao-mcp-server-shi/image-1.png)
+```
+
+Article in `产品体验与思考/`:
+```markdown
+# Before
+![](https://priv-sdn-001.mowen.cn/.../2060198638129446914.png?Expires=...)
+
+# After
+![](../images/dang-ni-yao-xu-yao-mcp-server-shi/image-1.png)
 ```
 
 ### Step 4: Update Category Manager Catalog
