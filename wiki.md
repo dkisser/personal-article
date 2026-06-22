@@ -17,6 +17,7 @@
 - [[「Agent在控制你的浏览器会话"]] — 解释AI Agent如何通过Chrome扩展和Native Messaging技术控制浏览器会话，并提供安全开关让用户可见可控。
 - [[「云端Agent如何使用你本地机器的浏览器？"]] — 探讨云端Agent通过WebSocket连接使用本地浏览器的方案，核心挑战在于连接管理与安全认证。
 - [[「CC-Switch还真是个不错的产品」]] — CC-Switch是一个能让Coding Agent无缝切换底层LLM供应商的工具，支持Claude Code、Codex等。
+- [[「K2.7 Code 高速版，yyds」]] — 体验Kimi K2.7 Code高速版，申请快速通过，速度约普通版6倍，但5小时额度约2小时用完。包含在Coding Plan内，优于MiniMax强制套餐。
 
 ## 产品复刻
 
