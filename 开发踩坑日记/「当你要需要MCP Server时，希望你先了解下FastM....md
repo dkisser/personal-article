@@ -48,13 +48,3 @@ Python生态中原生的mcp也能很好的实现。但是，你让AI自己去实
 Coding Agent有幻觉，因为大部分的模型知识只到 2025 年 5月左右。让 Agent 自己设计方案的时候，很可能会采用 **SSE的方案，这个是明确已经被弃用了的，要注意** 。
 
 ![](images/当你要需要mcp-server时希望你先了解下fastmcp/image-2.png)
-
-0
-
-0
-
-0
-
-\\n
-
-<iframe src="chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/side-panel.html?context=iframe"></iframe>

@@ -50,13 +50,3 @@ npx create-fullstack-vite@latest my-fullstack-demo
 其实还有其他全栈的脚手架工具，有兴趣的盆友可以参考下。
 
 ![](../images/typescript全栈踩坑日记-项目搭建/image-5.png)
-
-0
-
-0
-
-0
-
-\\n
-
-<iframe src="chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/side-panel.html?context=iframe"></iframe>

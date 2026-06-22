@@ -52,13 +52,3 @@ status: "published"
 \- 如何安全建立连接，以保证WebSocket连接和用户绑定？
 
 \- 在使用 WebSocket 来控制浏览器时，不同session之间如何避免浏览器使用的冲突？
-
-0
-
-0
-
-0
-
-\\n
-
-<iframe src="chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/side-panel.html?context=iframe"></iframe>

@@ -66,13 +66,3 @@ AI 并没有增加了我们成功的机率。而且，它产生了更多的垃�
 Design Prompts: [https://www.designprompts.dev/](https://www.designprompts.dev/)
 
 Lucide: [https://lucide.dev/](https://lucide.dev/)
-
-0
-
-0
-
-0
-
-\\n
-
-<iframe src="chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/side-panel.html?context=iframe"></iframe>
