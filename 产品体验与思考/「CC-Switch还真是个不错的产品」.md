@@ -50,13 +50,3 @@ NO，它还可以配置 **“统一供应商”**
 ![](images/cc-switch-huan-zhen-shi-ge-bu-cuo-de-chan-pin/image-4.png)
 
 使用 Coding Agent 时切换模型供应商这个需求肯定会有，毕竟不同的模型侧重点都不一样。在解决这个问题的同时，顺手解决一些周边的小需求，CC-Switch 的设计者真聪明。
-
-0
-
-0
-
-0
-
-\\n
-
-<iframe src="chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/side-panel.html?context=iframe"></iframe>

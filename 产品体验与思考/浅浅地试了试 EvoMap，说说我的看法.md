@@ -66,13 +66,3 @@ Agent时代，在解决SDK兼容问题时我们的认知负担大大降低了。
 或许当你真的拥有上百万的agent时，通过它沉淀的经验来提效很ok。至于现在，对我来说不同agent之间遇到的问题大都不太相同，我还无法直观地体会实际的价值。
 
 ![](../images/浅浅地试了试-evomap-说说我的看法/image-3.png)
-
-0
-
-0
-
-0
-
-\\n
-
-<iframe src="chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/side-panel.html?context=iframe"></iframe>

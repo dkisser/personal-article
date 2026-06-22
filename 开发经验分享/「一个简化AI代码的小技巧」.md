@@ -115,13 +115,3 @@ def _format_currency(amount):
 ```
 
 当然，很多高版本的语法也能简化。比如 python 中的 lambda、列表推导式这两个在处理数据的时候也很方便（lambda慎用，有时候写的又臭又长，更难理解）
-
-0
-
-0
-
-0
-
-\\n
-
-<iframe src="chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/side-panel.html?context=iframe"></iframe>
