@@ -42,4 +42,4 @@ category: "产品复刻"
 
 （这是给有一定动手能力的童鞋们提前开放的，如果搞不定运行环境，请耐心等两天）
 
-![](images/复刻codex浏览器插件-终篇/image-1.png)
+![](../images/复刻codex浏览器插件-终篇/image-1.png)

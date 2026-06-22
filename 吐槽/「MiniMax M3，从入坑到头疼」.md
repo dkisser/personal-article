@@ -24,15 +24,15 @@ status: "published"
 
 我也没仔细看设计,就开干了。过了一小时，发现居然给我拆了19个task出来。
 
-![](images/minimax-m3-从入坑到头疼/image-1.png)
+![](../images/minimax-m3-从入坑到头疼/image-1.png)
 
 拆就拆吧，按我的经验，一小时怎么只有3个任务完成了？这任务这么难吗？我网上翻了翻，发现已经进入第5个任务了，但是todo的状态没及时更新。。。
 
-![](images/minimax-m3-从入坑到头疼/image-2.png)
+![](../images/minimax-m3-从入坑到头疼/image-2.png)
 
 好吧，我想着，有点小毛病也正常，不更新todo而已啦。接着我又去给龙虾写定时任务的 Prompt，等我写完，差不多也是午饭时间了，我打开终端一看，我人都傻了~~
 
-![](images/minimax-m3-从入坑到头疼/image-3.png)
+![](../images/minimax-m3-从入坑到头疼/image-3.png)
 
 搞了半天，还有这么多任务要做！这慢的太离谱了吧，我用 Qoder 的其他模型，也没这样啊？
 
@@ -40,6 +40,6 @@ status: "published"
 
 我果断切到了刚上线的 GLM 5.2
 
-![](images/minimax-m3-从入坑到头疼/image-4.png)
+![](../images/minimax-m3-从入坑到头疼/image-4.png)
 
 先跑着看看吧，虽然 thinking 模式目前没让开，但是有 1M 上下文用也不错。

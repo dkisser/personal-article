@@ -26,7 +26,7 @@ status: "published"
 
 紧接着，GLM-5.2 来了。真正可用的 1M 上下文，下周开源，走 MIT 协议。
 
-![](images/glm-5-2-ji-shu-bao-gao-jie-du/image-1.png)
+![](../images/glm-5-2-ji-shu-bao-gao-jie-du/image-1.png)
 
 而在昨天，GLM5.2的技术报告出来了，我看完后，斗胆给大家解读下。
 
@@ -34,7 +34,7 @@ status: "published"
 
 跑分的话，目前关注更多是 SWE-bench Pro和 Frontier SWE。毕竟长时程、企业级软件工程任务是和大家日常工作息息相关的部分。
 
-![](images/glm-5-2-ji-shu-bao-gao-jie-du/image-2.png)
+![](../images/glm-5-2-ji-shu-bao-gao-jie-du/image-2.png)
 
 可以看到就这两个参数上来看是很接近了。但是这个分数有没有水分，就不好说，毕竟刷分行为太常见了。
 
@@ -50,7 +50,7 @@ status: "published"
 
 以Llama 70B模型为例，在FP16精度下运行1M token上下文，KV Cache的体积约为 **135GB** ，这已经超过了大多数单节点GPU的显存容量 。更麻烦的是，KV Cache的显存占用与序列长度和batch size都呈线性增长关系——当同时处理多个长文本请求时，显存压力会成倍放大。
 
-![](images/glm-5-2-ji-shu-bao-gao-jie-du/image-3.png)
+![](../images/glm-5-2-ji-shu-bao-gao-jie-du/image-3.png)
 
 **给 KV Cache 瘦身**
 

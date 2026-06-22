@@ -21,7 +21,7 @@ status: "published"
 
 支持 Claude Code、Codex、Gemini（应该要改名叫反重力了~）、OpenCode、龙虾、爱马仕。
 
-![](images/cc-switch-huan-zhen-shi-ge-bu-cuo-de-chan-pin/image-1.png)
+![](../images/cc-switch-huan-zhen-shi-ge-bu-cuo-de-chan-pin/image-1.png)
 
 如果，你订阅了一个 Coding Plan，想在好几个 Coding Agent 中使用。比如我，在编程的时候使用 Claude Code。而在日常外出时突然蹦出一个灵感，我会使用龙虾。
 
@@ -29,7 +29,7 @@ status: "published"
 
 NO，它还可以配置 **“统一供应商”**
 
-![](images/cc-switch-huan-zhen-shi-ge-bu-cuo-de-chan-pin/image-2.png)
+![](../images/cc-switch-huan-zhen-shi-ge-bu-cuo-de-chan-pin/image-2.png)
 
 **SKILLS 管理**
 
@@ -39,7 +39,7 @@ NO，它还可以配置 **“统一供应商”**
 
 坏消息：不支持 Cursor 或者 Qoder。
 
-![](images/cc-switch-huan-zhen-shi-ge-bu-cuo-de-chan-pin/image-3.png)
+![](../images/cc-switch-huan-zhen-shi-ge-bu-cuo-de-chan-pin/image-3.png)
 
 当然，还有MCP、提示词的管理。这里我暂时没怎么用，就不介绍了。
 
@@ -47,6 +47,6 @@ NO，它还可以配置 **“统一供应商”**
 
 之前我用 Claude Code 时，我一直想找一个可视化的地方来管理会话。当然，也找到了一些开源项目，只是我觉得这个小需求还得需要额外部署一些服务，有点....说不上来的味道。但是 CC-Switch 顺手解决了，我感觉挺好。
 
-![](images/cc-switch-huan-zhen-shi-ge-bu-cuo-de-chan-pin/image-4.png)
+![](../images/cc-switch-huan-zhen-shi-ge-bu-cuo-de-chan-pin/image-4.png)
 
 使用 Coding Agent 时切换模型供应商这个需求肯定会有，毕竟不同的模型侧重点都不一样。在解决这个问题的同时，顺手解决一些周边的小需求，CC-Switch 的设计者真聪明。

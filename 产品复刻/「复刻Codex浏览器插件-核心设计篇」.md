@@ -26,7 +26,7 @@ category: "产品复刻"
 
 下图中的 WebSocket Server、WebSocket Local、Extension 即是我们需要设计的产品（组合）。
 
-![](images/复刻codex浏览器插件-核心设计篇/image-1.png)
+![](../images/复刻codex浏览器插件-核心设计篇/image-1.png)
 
 **WebSocket Server 和 WebSocket Local**
 

@@ -24,7 +24,7 @@ category: "产品复刻"
 
 **这次，我用了 Monorepo，并且统一使用 ts 编写。** 把通讯协议放到共享项目目录下，这样基本不会有通讯协议的问题。（或者说在编码的时候 Agent 能直接检查出来问题，调试都不用了）
 
-![](images/复刻codex浏览器插件-实现篇/image-1.png)
+![](../images/复刻codex浏览器插件-实现篇/image-1.png)
 
 **重大的功能使用 Super Power 还真不一样**
 
@@ -32,7 +32,7 @@ category: "产品复刻"
 
 最总要的一点是，Super Power 在新版本中添加了网页端。Agent 在给你方案的时候除了给你简短的几句话之外，还会给你举例说明（通过 http://localhost:56666可以看到 不光概念，而且还有例子及重点，分的真的很清楚，很好理解）。
 
-![](images/复刻codex浏览器插件-实现篇/image-2.png) ![](images/复刻codex浏览器插件-实现篇/image-3.png) ![](images/复刻codex浏览器插件-实现篇/image-4.png)
+![](../images/复刻codex浏览器插件-实现篇/image-2.png) ![](../images/复刻codex浏览器插件-实现篇/image-3.png) ![](../images/复刻codex浏览器插件-实现篇/image-4.png)
 
 1/3
 
@@ -42,7 +42,7 @@ category: "产品复刻"
 
 但今天遇到的是 Service Worker 默认30s休眠，需要单独抽离一个 offscreen.html
 
-![](images/复刻codex浏览器插件-实现篇/image-5.png) ![](images/复刻codex浏览器插件-实现篇/image-6.png) ![](images/复刻codex浏览器插件-实现篇/image-7.png) ![](images/复刻codex浏览器插件-实现篇/image-8.png) ![](images/复刻codex浏览器插件-实现篇/image-9.png)
+![](../images/复刻codex浏览器插件-实现篇/image-5.png) ![](../images/复刻codex浏览器插件-实现篇/image-6.png) ![](../images/复刻codex浏览器插件-实现篇/image-7.png) ![](../images/复刻codex浏览器插件-实现篇/image-8.png) ![](../images/复刻codex浏览器插件-实现篇/image-9.png)
 
 1/5
 
@@ -403,6 +403,6 @@ New app \`apps/local-proxy\` to be added. \`apps/websocket\` currently contains 
 
 **show time**
 
-![](images/复刻codex浏览器插件-实现篇/image-10.png) ![](images/复刻codex浏览器插件-实现篇/image-9.png) ![](images/复刻codex浏览器插件-实现篇/image-11.png) ![](images/复刻codex浏览器插件-实现篇/image-12.png)
+![](../images/复刻codex浏览器插件-实现篇/image-10.png) ![](../images/复刻codex浏览器插件-实现篇/image-9.png) ![](../images/复刻codex浏览器插件-实现篇/image-11.png) ![](../images/复刻codex浏览器插件-实现篇/image-12.png)
 
 1/4

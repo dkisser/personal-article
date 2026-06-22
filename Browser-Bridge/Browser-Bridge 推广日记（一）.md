@@ -48,4 +48,4 @@ Browser-Bridge 的核心功能做完了，本想着像以前一样直接上传 g
 
 Browser-Bridge 链接： [https://github.com/dkisser/browser-bridge](https://github.com/dkisser/browser-bridge)
 
-![](images/browser-bridge-tui-guang-ri-ji-yi/image-1.png)
+![](../images/browser-bridge-tui-guang-ri-ji-yi/image-1.png)

@@ -22,7 +22,7 @@ category: "产品复刻"
 
 最开始，我认为只要有端到端的通讯就必须要有鉴权，不管是账号密码或者是自定义 Access Key。于是乎，我让 Agent 按照我的思路来设计了 Extension -> Local Proxy、Local Proxy -> Ws-Socket、Ws-Socket -> CLI 三个鉴权。
 
-![](images/复刻codex浏览器插件-鉴权篇/image-1.png) ![](images/复刻codex浏览器插件-鉴权篇/image-2.png) ![](images/复刻codex浏览器插件-鉴权篇/image-3.png)
+![](../images/复刻codex浏览器插件-鉴权篇/image-1.png) ![](../images/复刻codex浏览器插件-鉴权篇/image-2.png) ![](../images/复刻codex浏览器插件-鉴权篇/image-3.png)
 
 1/3
 
@@ -32,7 +32,7 @@ category: "产品复刻"
 
 所以，我让 Agent 去掉了其他的鉴权，只保留了 Local-Proxy -> Ws-Socket 的鉴权。
 
-![](images/复刻codex浏览器插件-鉴权篇/image-4.png)
+![](../images/复刻codex浏览器插件-鉴权篇/image-4.png)
 
 现在真有点掌控感了~，这个设计完全由自己做，Agent 做实现。
 
