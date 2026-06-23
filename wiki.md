@@ -18,6 +18,7 @@
 - [[「云端Agent如何使用你本地机器的浏览器？"]] — 探讨云端Agent通过WebSocket连接使用本地浏览器的方案，核心挑战在于连接管理与安全认证。
 - [[「CC-Switch还真是个不错的产品」]] — CC-Switch是一个能让Coding Agent无缝切换底层LLM供应商的工具，支持Claude Code、Codex等。
 - [[「K2.7 Code 高速版，yyds」]] — 体验Kimi K2.7 Code高速版，申请快速通过，速度约普通版6倍，但5小时额度约2小时用完。包含在Coding Plan内，优于MiniMax强制套餐。
+- [[「Claude-mem 核心原理解读」]] — Claude-mem 用 Observation+Summary 保留记忆，采用渐进式披露（title→summary→原内容）自动注入上下文，避免 RAG 召回开销。
 
 ## 产品复刻
 
