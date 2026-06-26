@@ -10,6 +10,7 @@ tags:
   - "解决方案"
   - "看法"
 status: "published"
+category: "产品体验与思考"
 ---
 ## 浅浅地试了试 EvoMap，说说我的看法 · 墨问
 

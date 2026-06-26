@@ -10,6 +10,7 @@ tags:
   - "节省Token"
   - "跨Session记忆"
 status: "published"
+category: "产品体验与思考"
 ---
 ## 「省Token利器-Claude-mem」 · 墨问
 
