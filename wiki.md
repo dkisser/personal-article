@@ -21,6 +21,7 @@
 - [[「CC-Switch还真是个不错的产品」]] — CC-Switch是一个能让Coding Agent无缝切换底层LLM供应商的工具，支持Claude Code、Codex等。
 - [[「K2.7 Code 高速版，yyds」]] — 体验Kimi K2.7 Code高速版，申请快速通过，速度约普通版6倍，但5小时额度约2小时用完。包含在Coding Plan内，优于MiniMax强制套餐。
 - [[「Claude-mem 核心原理解读」]] — Claude-mem 用 Observation+Summary 保留记忆，采用渐进式披露（title→summary→原内容）自动注入上下文，避免 RAG 召回开销。
+- [[「Kimi Work 的半额 Token消耗突然不香了~」]] — Kimi Work 半额 Token 消耗看似划算，但迁移 Skills 和无法使用 Claude-mem 的隐形成本让迁移决心动摇。作者意识到工具切换不仅是功能比较，社区生态同样重要。
 
 ## 产品复刻
 
@@ -40,14 +41,17 @@
 ## 技术报告解读
 
 - [[「GLM 5.2 技术报告解读」]] — 本文解读GLM 5.2技术报告，讲述国外模型被限制后智谱发布GLM-5.2，支持1M上下文并开源。重点分析长上下文难题：KV Cache爆炸及通过MLA-256和FP8量化压缩，以及DSA稀疏注意力提升效率。
+- [[「GLM5.2技术报告解读-DSA」]] — 解读 GLM5.2 DSA 优化：Indexer Share、KV Share、Rejection Sampling 与 TV Loss。
 
 ## 技术思考
 
-- [[「一个 setTimeout 引出了事件循环问题，这个事件循..."]] — 从setTimeout泄露bug入手，揭示事件循环本质：单线程死循环处理任务队列。探讨动态语言为何难以多线程，以及事件循环适合前端却不适合大规模后端的原因。
+- [[「一个 setTimeout 引出了事件循环问题，这个事件循...]] — 从setTimeout泄露bug入手，揭示事件循环本质：单线程死循环处理任务队列。探讨动态语言为何难以多线程，以及事件循环适合前端却不适合大规模后端的原因。
+- [[「Browser-Bridge 新版本中关于 MCP 和 C...]] — 从 CLI+SKILL 转向 MCP，Browser-Bridge 新版集成方式背后的上下文窗口考量。
 
 ## Browser-Bridge
 
 - [[Browser-Bridge 推广日记（一）]] — 作者完成Browser-Bridge核心功能后，设目标100用户10好评。反思过去项目失败源于对不确定性的害怕，强调产品生命周期取决于用户使用而非设计者意愿，需“干中学”。
+- [[「做了个有趣的小工具 Browser Bridge - 让浏...」]] — Browser-Bridge 通过 WebSocket 将本地 Chrome 暴露为任意 Agent 可调用的工具，无需安装新应用，支持 Claude Code、Langchain 和 Python 脚本直接复用登录态浏览器操作。
 
 ---
 
