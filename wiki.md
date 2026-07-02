@@ -12,6 +12,8 @@
 - [[「尝试 Node 搭建一个后端」]] — 作者尝试使用Node搭建后端，采用Bun作为开发环境、Fastify和TypeScript构建Web服务，并添加PM2部署脚本。
 - [[「尝试 Node 搭建后端-开发框架」]] — 使用Node.js (Fastify + @fastify/awilix) 实现后端开发框架，通过依赖注入容器管理服务，利用Fastify Hooks实现AOP。
 
+- [[「Agent越来越智能，但我发现软件工程仍然很重要"]] — Agent改bug时只改了报错处，却遗漏了重复定义的API响应类型，导致连接不断重连。作者借此反思：消除重复、保持强一致的代码契约，仍是引导Agent高效协作的关键。
+
 ## 产品体验与思考
 
 - [[浅浅地试了试 EvoMap，说说我的看法]] — 对 EvoMap 解决方案库的初步体验与思考，讨论 Agent 时代下知识沉淀与悬赏机制的价值。
@@ -41,7 +43,7 @@
 ## 技术报告解读
 
 - [[「GLM 5.2 技术报告解读」]] — 本文解读GLM 5.2技术报告，讲述国外模型被限制后智谱发布GLM-5.2，支持1M上下文并开源。重点分析长上下文难题：KV Cache爆炸及通过MLA-256和FP8量化压缩，以及DSA稀疏注意力提升效率。
-- [[「GLM5.2技术报告解读-DSA」]] — 解读 GLM5.2 DSA 优化：Indexer Share、KV Share、Rejection Sampling 与 TV Loss。
+- [[「GLM5.2技术报告解读-MTP」]] — 解读 GLM5.2 DSA 优化：Indexer Share、KV Share、Rejection Sampling 与 TV Loss。
 
 ## 技术思考
 
