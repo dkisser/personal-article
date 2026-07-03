@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<'EOF'\nfeat: publish event loop article and add 技术思考 category\n\nPublish \"一个 setTimeout 引出了事件循环问题\" in a new 技术思考 category.\nCleaned trailing garbage from the article and synced all catalogs.\nEOF\n\\)\")",
+      "Bash(git push:*)",
+      "Bash(gh auth:*)",
+      "Bash(git push https://x-access-token:$\\(gh auth token\\)@github.com/dkisser/personal-article.git main)",
+      "Bash(ls /Users/wenchen/workspace/personal-article/images/ 2>/dev/null | head -20)"
+    ]
+  }
+}
