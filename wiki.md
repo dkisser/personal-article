@@ -24,6 +24,7 @@
 - [[「K2.7 Code 高速版，yyds」]] — 体验Kimi K2.7 Code高速版，申请快速通过，速度约普通版6倍，但5小时额度约2小时用完。包含在Coding Plan内，优于MiniMax强制套餐。
 - [[「Claude-mem 核心原理解读」]] — Claude-mem 用 Observation+Summary 保留记忆，采用渐进式披露（title→summary→原内容）自动注入上下文，避免 RAG 召回开销。
 - [[「Kimi Work 的半额 Token消耗突然不香了~」]] — Kimi Work 半额 Token 消耗看似划算，但迁移 Skills 和无法使用 Claude-mem 的隐形成本让迁移决心动摇。作者意识到工具切换不仅是功能比较，社区生态同样重要。
+- [[「Run fast, Run first」]] — 从迷恋动态语言的快速构建，到发现 Java 之慢源于内心执念；Agent 时代应先找到用户愿意买单的方向。
 
 ## 产品复刻
 
