@@ -10,6 +10,8 @@ tags:
   - "Coding Agent"
   - "LLM切换"
 status: "published"
+category: "产品体验与思考"
+
 ---
 ## 「CC-Switch还真是个不错的产品」 · 墨问
 

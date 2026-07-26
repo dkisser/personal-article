@@ -10,6 +10,8 @@ tags:
   - "TypeScript"
   - "前端工具链"
 status: "published"
+category: "开发踩坑日记"
+
 ---
 ## 「管理TypeScript生态中的Monorepo项目」 · 墨问
 

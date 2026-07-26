@@ -4,11 +4,10 @@
 
 ## 开发踩坑日记
 
-- [[「"精细控制"和"开箱即用"的Agent开发路线"]] — 本文介绍了Agent开发的两种路线：Pi追求极致性能与自由扩展，适合学习；DeepAgents追求开箱即用，适合快速开发。作者建议，一般需求可通过Skill解决，仅在需要自主规划并作为云端服务时才自研Agent。
-- [[「管理TypeScript生态中的Monorepo项目"]] — 介绍 TypeScript 生态中 Monorepo 的实践，使用 pnpm、turbo、vite、jest 等工具管理依赖和任务。
-- [[「TypeScript全栈踩坑日记-项目搭建"]] — 使用 create-fullstack-vite 搭建 TypeScript 全栈项目的踩坑记录，技术栈 React + TypeScript + NestJS。
-- [[「TypeScript全栈踩坑日记-文章管理系统的迭代"]] — 使用 TypeScript 全栈快速构建文章管理系统，AI 辅助下从需求到实现约 40 分钟。
-- [[「当你要需要MCP Server时，希望你先了解下FastM..."]] — Python 生态集成 Agent 工具对比，推荐 FastMCP 的 Streamable HTTP 方案，并提醒避开已弃用的 SSE。
+- [[「管理TypeScript生态中的Monorepo项目」]] — 介绍 TypeScript 生态中 Monorepo 的实践，使用 pnpm、turbo、vite、jest 等工具管理依赖和任务。
+- [[「TypeScript全栈踩坑日记-项目搭建」]] — 使用 create-fullstack-vite 搭建 TypeScript 全栈项目的踩坑记录，技术栈 React + TypeScript + NestJS。
+- [[「TypeScript全栈踩坑日记-文章管理系统的迭代」]] — 使用 TypeScript 全栈快速构建文章管理系统，AI 辅助下从需求到实现约 40 分钟。
+- [[「当你要需要MCP Server时，希望你先了解下FastM...」]] — Python 生态集成 Agent 工具对比，推荐 FastMCP 的 Streamable HTTP 方案，并提醒避开已弃用的 SSE。
 - [[「尝试 Node 搭建一个后端」]] — 作者尝试使用Node搭建后端，采用Bun作为开发环境、Fastify和TypeScript构建Web服务，并添加PM2部署脚本。
 - [[「尝试 Node 搭建后端-开发框架」]] — 使用Node.js (Fastify + @fastify/awilix) 实现后端开发框架，通过依赖注入容器管理服务，利用Fastify Hooks实现AOP。
 
@@ -18,9 +17,10 @@
 ## 产品体验与思考
 
 - [[浅浅地试了试 EvoMap，说说我的看法]] — 对 EvoMap 解决方案库的初步体验与思考，讨论 Agent 时代下知识沉淀与悬赏机制的价值。
+- [[「“精细控制”和“开箱即用”的Agent开发路线」]] — 本文介绍了Agent开发的两种路线：Pi追求极致性能与自由扩展，适合学习；DeepAgents追求开箱即用，适合快速开发。作者建议，一般需求可通过Skill解决，仅在需要自主规划并作为云端服务时才自研Agent。
 - [[「省Token利器-Claude-mem」]] — 介绍Claude-mem工具，通过mem-search MCP实现本地文件与向量检索，避免AI重复理解上下文从而节省Token，适合持续迭代的项目。
-- [[「Agent在控制你的浏览器会话"]] — 解释AI Agent如何通过Chrome扩展和Native Messaging技术控制浏览器会话，并提供安全开关让用户可见可控。
-- [[「云端Agent如何使用你本地机器的浏览器？"]] — 探讨云端Agent通过WebSocket连接使用本地浏览器的方案，核心挑战在于连接管理与安全认证。
+- [[「Agent在控制你的浏览器会话」]] — 解释AI Agent如何通过Chrome扩展和Native Messaging技术控制浏览器会话，并提供安全开关让用户可见可控。
+- [[「云端Agent如何使用你本地机器的浏览器？」]] — 探讨云端Agent通过WebSocket连接使用本地浏览器的方案，核心挑战在于连接管理与安全认证。
 - [[「CC-Switch还真是个不错的产品」]] — CC-Switch是一个能让Coding Agent无缝切换底层LLM供应商的工具，支持Claude Code、Codex等。
 - [[「K2.7 Code 高速版，yyds」]] — 体验Kimi K2.7 Code高速版，申请快速通过，速度约普通版6倍，但5小时额度约2小时用完。包含在Coding Plan内，优于MiniMax强制套餐。
 - [[「Claude-mem 核心原理解读」]] — Claude-mem 用 Observation+Summary 保留记忆，采用渐进式披露（title→summary→原内容）自动注入上下文，避免 RAG 召回开销。

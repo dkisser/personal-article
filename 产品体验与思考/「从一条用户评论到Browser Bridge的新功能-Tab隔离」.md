@@ -10,6 +10,8 @@ tags:
   - "Tab隔离"
   - "AI Agent"
 status: "published"
+category: "产品体验与思考"
+
 ---
 ## 「从一条用户评论到Browser Bridge的新功能-Tab隔离」 · 墨问
 

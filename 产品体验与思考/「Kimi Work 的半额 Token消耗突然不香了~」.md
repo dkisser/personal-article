@@ -10,6 +10,8 @@ tags:
   - "AI工具"
   - "社区生态"
 status: "published"
+category: "产品体验与思考"
+
 ---
 ## 「Kimi Work 的半额 Token消耗突然不香了~」 · 墨问
 

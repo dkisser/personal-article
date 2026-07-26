@@ -10,6 +10,8 @@ tags:
   - "GLM5.2"
   - "稀疏注意力"
 status: "published"
+category: "技术报告解读"
+
 ---
 ## 「GLM5.2技术报告解读-MTP」 · 墨问
 

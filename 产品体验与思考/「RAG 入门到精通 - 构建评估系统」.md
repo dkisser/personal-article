@@ -10,6 +10,8 @@ tags:
   - "评估系统"
   - "实践思考"
 status: "published"
+category: "产品体验与思考"
+
 ---
 ## 「RAG 入门到精通 - 构建评估系统」 · 墨问
 

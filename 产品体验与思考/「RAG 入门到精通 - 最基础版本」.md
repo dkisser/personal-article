@@ -10,6 +10,8 @@ tags:
   - "向量数据库"
   - "咖啡助手"
 status: "published"
+category: "产品体验与思考"
+
 ---
 ## 「RAG 入门到精通 - 最基础版本」 · 墨问
 

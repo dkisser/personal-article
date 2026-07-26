@@ -10,6 +10,8 @@ tags:
   - "Token消耗"
   - "渐进式披露"
 status: "published"
+category: "产品体验与思考"
+
 ---
 ## 「Claude-mem 核心原理解读」 · 墨问
 

@@ -10,6 +10,8 @@ tags:
   - "AI代理集成"
   - "WebSocket桥梁"
 status: "published"
+category: "Browser-Bridge"
+
 ---
 ## 「做了个有趣的小工具 Browser Bridge - 让浏... · 墨问
 

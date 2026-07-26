@@ -10,6 +10,8 @@ tags:
   - "Chrome Extension"
   - "Native Messaging"
 status: "published"
+category: "产品体验与思考"
+
 ---
 ## 「Agent在控制你的浏览器会话」 · 墨问
 

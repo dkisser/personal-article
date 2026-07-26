@@ -10,6 +10,8 @@ tags:
   - "Pi"
   - "DeepAgents"
 status: "published"
+category: "产品体验与思考"
+
 ---
 ## 「“精细控制”和“开箱即用”的Agent开发路线」 · 墨问
 

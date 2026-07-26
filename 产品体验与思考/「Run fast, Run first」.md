@@ -10,6 +10,8 @@ tags:
   - "Java"
   - "软件设计"
 status: "published"
+category: "产品体验与思考"
+
 ---
 ## 「Run fast, Run first」 · 墨问
 

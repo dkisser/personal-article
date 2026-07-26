@@ -10,6 +10,8 @@ tags:
   - "Tmux"
   - "Claude"
 status: "published"
+category: "产品体验与思考"
+
 ---
 ## 「自从用上 Agents View 之后， 我的心力交瘁感消失了」 · 墨问
 

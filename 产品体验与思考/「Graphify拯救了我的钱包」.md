@@ -10,6 +10,8 @@ tags:
   - "AST"
   - "代码定位"
 status: "published"
+category: "产品体验与思考"
+
 ---
 ## 「Graphify拯救了我的钱包」 · 墨问
 

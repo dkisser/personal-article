@@ -10,6 +10,8 @@ tags:
   - "MCP"
   - "Python"
 status: "published"
+category: "开发踩坑日记"
+
 ---
 ## 「当你要需要MCP Server时，希望你先了解下FastM... · 墨问
 

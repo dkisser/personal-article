@@ -10,6 +10,8 @@ tags:
   - "全栈开发"
   - "踩坑"
 status: "published"
+category: "开发踩坑日记"
+
 ---
 ## 「TypeScript全栈踩坑日记-项目搭建」 · 墨问
 

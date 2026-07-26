@@ -10,6 +10,8 @@ tags:
   - "全栈开发"
   - "文章管理系统"
 status: "published"
+category: "开发踩坑日记"
+
 ---
 ## 「TypeScript全栈踩坑日记-文章管理系统的迭代」 · 墨问
 

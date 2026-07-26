@@ -10,6 +10,8 @@ tags:
   - "编程风格"
   - "AI代码"
 status: "published"
+category: "经验总结"
+
 ---
 ## 「一个简化AI代码的小技巧」 · 墨问
 

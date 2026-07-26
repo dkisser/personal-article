@@ -10,6 +10,8 @@ tags:
   - "JavaScript"
   - "动态语言"
 status: "published"
+category: "技术思考"
+
 ---
 ## 「一个 setTimeout 引出了事件循环问题，这个事件循... · 墨问
 

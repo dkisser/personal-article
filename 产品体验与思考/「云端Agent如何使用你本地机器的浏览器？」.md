@@ -10,6 +10,8 @@ tags:
   - "WebSocket"
   - "浏览器控制"
 status: "published"
+category: "产品体验与思考"
+
 ---
 ## 「云端Agent如何使用你本地机器的浏览器？」 · 墨问
 

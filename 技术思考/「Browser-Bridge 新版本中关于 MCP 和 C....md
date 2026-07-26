@@ -10,6 +10,8 @@ tags:
   - "MCP"
   - "工具集成"
 status: "published"
+category: "技术思考"
+
 ---
 ## 「Browser-Bridge 新版本中关于 MCP 和 C... · 墨问
 
