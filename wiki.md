@@ -38,6 +38,7 @@
 - [[「构建了一款P2P的聊天工具」]] — 该页面描述了一位开发者因为需要频繁在Mac mini和MacBook之间传输代码、令牌和文本，但现有IM工具存在单点登录、实名认证等问题，于是自己构建了一个P2P聊天工具。该工具无需账号，通过命令行TUI界面实现点对点传输，支持文本和文件，并提供了GitHub链接。
 - [[Spring 为何没有在 Java之外的地方存在？]] — Spring 起源于收拾 EJB 臃肿的烂摊子，终成 Java 企业开发事实标准。Java 静态类型特性迫其用反射与动态代理实现 IoC/AOP，而 Python 等动态语言用装饰器即可达到同样效果。
 - [[Browser-Bridge 产品推广与思考]] — 复盘 Browser-Bridge 推广：Star 仍为 0、用户难追踪，发现 Google 搜索比 GitHub 站内更精准，下阶段聚焦搜索优化。
+- [[给大家安利一个在Agent时代能省钱的浏览器管理工具]] — 推广 Browser-Bridge 时意外发现 pinchTab：作为 Chrome 管家管理 CDP 实例、提供白名单与多实例可视化，通过 Accessibility Tree 精简页面结构以节省 Agent token。支持 MCP 集成，安装后需配置域名白名单。
 
 ## 产品复刻
 
