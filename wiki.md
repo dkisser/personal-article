@@ -39,6 +39,7 @@
 - [[Spring 为何没有在 Java之外的地方存在？]] — Spring 起源于收拾 EJB 臃肿的烂摊子，终成 Java 企业开发事实标准。Java 静态类型特性迫其用反射与动态代理实现 IoC/AOP，而 Python 等动态语言用装饰器即可达到同样效果。
 - [[Browser-Bridge 产品推广与思考]] — 复盘 Browser-Bridge 推广：Star 仍为 0、用户难追踪，发现 Google 搜索比 GitHub 站内更精准，下阶段聚焦搜索优化。
 - [[给大家安利一个在Agent时代能省钱的浏览器管理工具]] — 推广 Browser-Bridge 时意外发现 pinchTab：作为 Chrome 管家管理 CDP 实例、提供白名单与多实例可视化，通过 Accessibility Tree 精简页面结构以节省 Agent token。支持 MCP 集成，安装后需配置域名白名单。
+- [[感觉已经不在需要 Super power 了]] — 作者两周未用 Super power：Grill 已被 mattpock/skills 单独替代；流程冗长使单 feature 从半小时涨到 1–6 小时；Kimi K2.7 等模型已能搞定小功能，返工减少；订阅中可用 K3 后复杂任务也不再依赖它。
 
 ## 产品复刻
 
