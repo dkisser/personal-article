@@ -42,6 +42,7 @@
 - [[给大家安利一个在Agent时代能省钱的浏览器管理工具]] — 推广 Browser-Bridge 时意外发现 pinchTab：作为 Chrome 管家管理 CDP 实例、提供白名单与多实例可视化，通过 Accessibility Tree 精简页面结构以节省 Agent token。支持 MCP 集成，安装后需配置域名白名单。
 - [[感觉已经不在需要 Super power 了]] — 作者两周未用 Super power：Grill 已被 mattpock/skills 单独替代；流程冗长使单 feature 从半小时涨到 1–6 小时；Kimi K2.7 等模型已能搞定小功能，返工减少；订阅中可用 K3 后复杂任务也不再依赖它。
 - [[Browser Bridge 推广过程中的反思（一）]] — 推广 Browser-Bridge 时发现搜索排名低、星标为零。决定从 Google Console 看流量词并纠结是否找人帮忙点击破零——最终认为刷量与找真实用户殊途同归，目标始终是真实用户。
+- [[Browser-bridge 新版本中的内容降噪设计]] — 通过过滤 JS/CSS、简化标签属性、合并嵌套标签、改用自定义语义标签来降低页面噪音，并新增 snapshot 指令仅返回关键结构、超 4k 字符自动截断。数据量降低约 98%，Gmail 任务从近 20 分钟、5 小时限额降至 2-3 分钟、约 1% token 消耗。
 
 ## 产品复刻
 
