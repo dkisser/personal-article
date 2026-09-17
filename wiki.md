@@ -74,6 +74,10 @@
 - [[Browser-Bridge 推广日记（一）]] — 作者完成Browser-Bridge核心功能后，设目标100用户10好评。反思过去项目失败源于对不确定性的害怕，强调产品生命周期取决于用户使用而非设计者意愿，需“干中学”。
 - [[「做了个有趣的小工具 Browser Bridge - 让浏...」]] — Browser-Bridge 通过 WebSocket 将本地 Chrome 暴露为任意 Agent 可调用的工具，无需安装新应用，支持 Claude Code、Langchain 和 Python 脚本直接复用登录态浏览器操作。
 
+## 记事本
+
+- [[CSDN真是个神奇的网站]] — 作者惊喜发现 CSDN 带来第一个 browser-bridge 用户，且对方直接私聊询问使用方式。作者曾因 CSDN 注水文章、VIP 限制而弃用，如今为做自媒体重新发帖。此事也提醒作者：安装难易度很影响推广效果。
+
 ---
 
 > 这是一个单向索引：wiki 链接到文章，文章本身不反向引用 wiki。
