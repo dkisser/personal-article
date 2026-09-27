@@ -37,6 +37,5 @@ status: "published"
 
 之前只会java + js，现在最喜欢的是 node + js 。没有尝试过其它的组合。感觉可以尝试一下 Go，毕竟这个也是之前云原生盛行的产物，性能肯定是可以的。
 
-字数 631 / 20000
 
 <iframe allow="clipboard-write; web-share" src="chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/side-panel.html?context=iframe"></iframe>
