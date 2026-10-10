@@ -11,6 +11,7 @@ tags:
   - "注意力管理"
   - "AI协作"
 status: "published"
+category: "产品体验与思考"
 ---
 ## Agent 工具的差异化，在你不看屏幕的那几分钟
 
